@@ -1,0 +1,35 @@
+.container {
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 20% 50% 30%;
+    grid-template-areas:
+    "jugadores jugadores jugadores jugadores"
+    "dado preg-resp preg-resp temporizador"
+    "tablero tablero tablero tablero";
+}
+
+#jugadores {
+    background-color: blueviolet;
+    grid-area: jugadores;
+}
+
+#dado {
+    background-color: blue;
+    grid-area: dado;
+}
+
+#preg-resp {
+    background-color: forestgreen;
+    grid-area: preg-resp;
+}
+
+#temporizador {
+    background-color: darkred;
+    grid-area: temporizador;
+}
+
+#tablero {
+    background-color: darkslategrey;
+    grid-area: tablero;
+}
