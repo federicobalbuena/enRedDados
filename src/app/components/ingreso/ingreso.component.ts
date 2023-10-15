@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class IngresoComponent {
 
+  ingresarCodigo() {
+    var ver = document.getElementById('inputCodigo') as HTMLElement;
+    ver.style.visibility = "visible";
+  }
 }

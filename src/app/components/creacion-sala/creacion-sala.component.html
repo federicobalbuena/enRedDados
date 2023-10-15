@@ -6,59 +6,67 @@
 </div>
 
 <form>
-    <fieldset class="form-group">
-        <legend class="mt-4">Modo de juego</legend>
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-        <label class="form-check-label" for="optionsRadios1">
+  <fieldset class="form-group">
+    <legend class="mt-4">Modo de juego</legend>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+      <label class="form-check-label" for="optionsRadios1">
         Solitario
-        </label>
-        </div>
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-        <label class="form-check-label" for="optionsRadios1">
-          Multijugador
-        </label>
-        </div>
-    
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+      <label class="form-check-label" for="optionsRadios1">
+        Multijugador
+      </label>
+    </div>
+
   </fieldset>
 
   <form>
     <fieldset class="form-group">
-        <legend class="mt-4">Dificultad</legend>
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+      <legend class="mt-4">Dificultad</legend>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+          checked="">
         <label class="form-check-label" for="optionsRadios1">
-        Facil (20")
+          Facil (20")
         </label>
-        </div>
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+          checked="">
         <label class="form-check-label" for="optionsRadios1">
           Medio (15")
         </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-            <label class="form-check-label" for="optionsRadios1">
-              Dificil (10")
-            </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                <label class="form-check-label" for="optionsRadios1">
-                  Random (dificultar aleatoria)
-                </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                    <label class="form-check-label" for="optionsRadios1">
-                      Personalizado
-                    </label>
-                    </div>
-    
-  </fieldset>
-  <button type="submit" class="btn btn-primary" routerLink="/partida">Crear partida</button>
-  <button type="button" class="btn btn-danger" routerLink="/">Volver</button>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+          checked="">
+        <label class="form-check-label" for="optionsRadios1">
+          Dificil (10")
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+          checked="">
+        <label class="form-check-label" for="optionsRadios1">
+          Random (dificultar aleatoria)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+          checked="">
+        <label class="form-check-label" for="optionsRadios1">
+          Personalizado
+        </label>
+      </div>
+      <label class="col-form-label mt-4" for="inputDefault">Ingresa tu nombre</label>
+      <input type="text" class="form-control" placeholder="Ingresa tu nombre" id="inputDefault">
 
-</form>
+
+    </fieldset>
+    <button type="submit" class="btn btn-primary" routerLink="/partida">Crear partida</button>
+    <button type="button" class="btn btn-danger" routerLink="/">Volver</button>
+
+  </form>
