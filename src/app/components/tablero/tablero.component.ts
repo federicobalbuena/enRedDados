@@ -7,87 +7,41 @@ import { Component } from '@angular/core';
 })
 export class TableroComponent {
 
-  respuestaCorrecta() {
+  respuesta(esCorrecta: boolean) {
     let ficha1 = document.getElementById("ficha1") as HTMLElement;
     let ficha2 = document.getElementById("ficha2") as HTMLElement;
     let ficha3 = document.getElementById("ficha3") as HTMLElement;
     let ficha4 = document.getElementById("ficha4") as HTMLElement;
     let jugador = (document.getElementById("jugador") as HTMLInputElement).value;
+    let cantidad = 3;
     console.log(jugador);
 
     switch (jugador) {
       case "1":
-        for (let index = 0; index < 3; index++) {
-          let nextDivFicha1 = ficha1.parentElement?.nextElementSibling;
-          nextDivFicha1?.appendChild(ficha1);
-        }
-
+        esCorrecta ? avanzar(ficha1, cantidad) : retroceder(ficha1)
         break;
       case "2":
-        for (let index = 0; index < 3; index++) {
-          let nextDivFicha2 = ficha2.parentElement?.nextElementSibling;
-          nextDivFicha2?.appendChild(ficha2);
-        }
-
+        esCorrecta ? avanzar(ficha2, cantidad) : retroceder(ficha2)
         break;
-
       case "3":
-        for (let index = 0; index < 3; index++) {
-          let nextDivFicha3 = ficha3.parentElement?.nextElementSibling;
-          nextDivFicha3?.appendChild(ficha3);
-        }
-
+        esCorrecta ? avanzar(ficha3, cantidad) : retroceder(ficha3)
         break;
-
       case "4":
-        for (let index = 0; index < 3; index++) {
-          let nextDivFicha4 = ficha4.parentElement?.nextElementSibling;
-          nextDivFicha4?.appendChild(ficha4);
-        }
-
+        esCorrecta ? avanzar(ficha4, cantidad) : retroceder(ficha4)
         break;
 
-      default:
-        break;
     }
 
-  }
+    function avanzar(ficha: HTMLElement, cantidad: number) {
+      for (let index = 0; index < cantidad; index++) {
+        let nextDivFicha = ficha.parentElement?.nextElementSibling;
+        nextDivFicha?.appendChild(ficha);
+      }
+    }
 
-  respuestaIncorrecta() {
-    let ficha1 = document.getElementById("ficha1") as HTMLElement;
-    let ficha2 = document.getElementById("ficha2") as HTMLElement;
-    let ficha3 = document.getElementById("ficha3") as HTMLElement;
-    let ficha4 = document.getElementById("ficha4") as HTMLElement;
-    let jugador = (document.getElementById("jugador") as HTMLInputElement).value;
-
-    switch (jugador) {
-      case "1":
-          for (let index = 0; index < 1; index++) {
-              let prevDivFicha1 = ficha1.parentElement?.previousElementSibling;
-              prevDivFicha1?.appendChild(ficha1);
-          }
-          break;
-      case "2":
-          for (let index = 0; index < 1; index++) {
-              let prevDivFicha2 = ficha2.parentElement?.previousElementSibling;
-              prevDivFicha2?.appendChild(ficha2);
-          }
-          break;
-      case "3":
-          for (let index = 0; index < 1; index++) {
-              let prevDivFicha3 = ficha3.parentElement?.previousElementSibling;
-              prevDivFicha3?.appendChild(ficha3);
-          }
-          break;
-      case "4":
-          for (let index = 0; index < 1; index++) {
-              let prevDivFicha4 = ficha4.parentElement?.previousElementSibling;
-              prevDivFicha4?.appendChild(ficha4);
-          }
-          break;
-
-      default:
-          break;
-  }
+    function retroceder(ficha: HTMLElement) {
+      let prevDivFicha = ficha.parentElement?.previousElementSibling;
+      prevDivFicha?.appendChild(ficha);
+    }
   }
 }
