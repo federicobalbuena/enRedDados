@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { CreacionSalaComponent } from './components/creacion-sala/creacion-sala.component';
@@ -30,7 +32,8 @@ import { PartidaComponent } from './components/partida/partida.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
