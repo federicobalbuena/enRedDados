@@ -24,11 +24,9 @@
 }
 
 #temporizador {
-    background-color: darkred;
     grid-area: temporizador;
 }
 
 #tablero {
-    background-color: darkslategrey;
     grid-area: tablero;
 }

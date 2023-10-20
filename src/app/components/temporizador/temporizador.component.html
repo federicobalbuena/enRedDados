@@ -1,1 +1,5 @@
-<p>temporizador works!</p>
+<div class="container">
+<h3>Tiempo restante</h3>
+<p id="timer" [ngStyle]="{'background-color': colorFondo}">{{ tiempoRestante }}</p>
+</div>
+<button id="btn-iniciarCuenta" (click)="iniciarCuenta()">Iniciar</button>
