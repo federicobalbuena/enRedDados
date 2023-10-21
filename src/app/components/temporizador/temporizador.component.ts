@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-temporizador',
@@ -8,8 +8,10 @@ import { Component } from '@angular/core';
 export class TemporizadorComponent {
   tiempoRestante: number = 15; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
   colorFondo: string = 'rgb(35, 177, 77)'
-
-  iniciarCuenta() {
+  @ViewChild('audio')
+  audio!: ElementRef;
+  
+    iniciarCuenta() {
     let interval = setInterval(() => { // Crea un intervalo que se ejecute cada segundo
 
       this.tiempoRestante > 0 ? this.cuentaAtras() : this.cambioJugador(interval);
@@ -29,8 +31,10 @@ export class TemporizadorComponent {
   }
 
   cambioJugador(interval: any) {
+    this.audio.nativeElement.play();
     this.colorFondo = 'rgb(35, 177, 77)';
     this.tiempoRestante = 15;
     clearInterval(interval);
+    
   }
 }
