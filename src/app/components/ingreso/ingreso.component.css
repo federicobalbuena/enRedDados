@@ -5,14 +5,11 @@
 .container {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-rows: 25% 25% 25%;
     grid-template-areas:
     "historia img-dado arte"
     "deporte img-dado ciencia"
-    "espectaculo buttons geografia";
-    
-
-    
+    "espectaculo buttons geografia";    
 }
 
 h1 {
@@ -21,7 +18,7 @@ h1 {
 }
 
 .buttons {
-    margin-top: 20%;
+    margin-top: 10%;
     grid-area: buttons;
 }
 
