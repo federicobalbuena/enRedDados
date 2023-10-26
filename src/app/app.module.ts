@@ -15,6 +15,7 @@ import { TableroComponent } from './components/tablero/tablero.component';
 import { GanadorComponent } from './components/ganador/ganador.component';
 import { PodioComponent } from './components/podio/podio.component';
 import { PartidaComponent } from './components/partida/partida.component';
+import { PreguntaService } from './services/pregunta.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { PartidaComponent } from './components/partida/partida.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PreguntaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,7 +31,10 @@ export class DadoComponent implements OnInit {
         this.preguntaResponse.pregunta = data.pregunta;
         this.preguntaResponse.respuesta = data.respuesta;
 
+        this._preguntaService.setPreguntaResponse(this.preguntaResponse)
         console.log(this.preguntaResponse)
+
+
       }, error: err => {
         console.log(err);
       }
