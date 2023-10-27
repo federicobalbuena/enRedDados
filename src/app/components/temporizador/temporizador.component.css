@@ -1,7 +1,7 @@
 .container {
     display: block;
     text-align: center;
-    margin-top: 10%;
+    /* margin-top: 5%; */
     visibility: visible;
 }
 
@@ -9,9 +9,10 @@ p {
     margin-left: 50%;
     transform: translate(-50%);
     margin-top: 10%;
-    width: 12.5rem;
-    height: 12.5rem;
-    font-size: 8rem;
+    width: 6rem;
+    height: 6rem;
+    font-size: 4rem;
     color: blanchedalmond;
     border-radius: 10%;
+
 }

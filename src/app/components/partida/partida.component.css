@@ -28,3 +28,7 @@
 #tablero {
     grid-area: tablero;
 }
+
+#btn-salir {
+    visibility: hidden;
+}
