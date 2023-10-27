@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Output, EventEmitter } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -43,11 +44,14 @@ export class DadoComponent implements OnInit {
 
   ngOnInit() {
 
+    
     let time = 2;
-    let randomValue: Number;
+    let randomValue: number;
     const dado: HTMLElement = document.querySelector('.dado') as HTMLElement;
     const nroPregunta = document.getElementById("nroPregunta") as HTMLInputElement;
     const verPregunta = document.getElementById("btnverpregunta") as HTMLElement;
+    const _service: PreguntaService = this._preguntaService;
+    const _service1: PreguntaService = this._preguntaService;
 
     dado.addEventListener('click', () => {
       dado.style.transition = '';
@@ -78,11 +82,13 @@ export class DadoComponent implements OnInit {
             break;
         };
 
-        if (nroPregunta.value.length < 3) {
+        if (nroPregunta.value.length < 1) {
           mostrarResultados()
         } else {
-          verPregunta.style.visibility = "hidden";
-          nroPregunta.value = "";
+          /* verPregunta.style.visibility = "hidden";
+          */
+          //nroPregunta.value = "";
+          //_service.cantRetroceder$.next(randomValue)
         }
       }, time * 10);
     });
@@ -91,8 +97,12 @@ export class DadoComponent implements OnInit {
       setTimeout(() => {
         nroPregunta.value = nroPregunta.value + randomValue.toString();
         nroPregunta.value.length == 3 ? verPregunta.style.visibility = "visible" : verPregunta.style.visibility = "hidden";
+        _service.initTemporizador$.next(true);
+        _service.cantAvanzar$.next(randomValue);
       }, 2000);
-
     };
   }
+
+  ngOnDestroy(){
+}
 }

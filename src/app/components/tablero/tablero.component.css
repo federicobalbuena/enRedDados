@@ -1,4 +1,4 @@
-    .caja img {
+.caja img {
         width: 5vw;
         height: 72%;
         border: 5px black solid;
@@ -7,7 +7,7 @@
     }
 
     .probarLogica {
-        visibility: visible;
+        visibility: hidden;
     }
 
     .ficha {

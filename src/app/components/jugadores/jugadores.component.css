@@ -19,6 +19,17 @@
 /* Conic gradient */
 .fancy::before { 
     content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1;
+    width: 100%;
+    animation: rotate 1.5s linear infinite; /*velocidad de giro*/
+}
+
+.selected::before { 
+    content: '';
     background: conic-gradient(transparent 270deg, white, transparent);/*color giro*/
     position: absolute;
     top: 50%;

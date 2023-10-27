@@ -1,0 +1,17 @@
+.presentacion {
+    border: 10px;
+    border-radius: 50px;
+    height: 100% !important;
+    line-height: 100px;
+    text-align: center;
+    visibility: hidden;
+}
+
+.flexbox {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    background: #ffff99;
+    color: #333;
+  }

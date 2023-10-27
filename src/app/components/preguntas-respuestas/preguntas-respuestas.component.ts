@@ -18,6 +18,9 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
   constructor(private _preguntaService: PreguntaService){}
   
   ngOnInit(){
+
+    const mensaje = document.getElementById("mensaje") as HTMLElement;
+
       //this.timer.restartCountdown(this.init); 
       this.preguntaResponseRef = this._preguntaService.preguntaResponse.subscribe(
       res => {
@@ -25,6 +28,12 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
         this.pregunta = res.pregunta;
         this.onComplete.emit()
       });
+
+        this._preguntaService.mostrarMensaje$.subscribe(mostrar => {
+          if(mostrar)
+          mensaje.style.visibility = "visible"
+        });
+    
   }
   ngOnDestroy(){
       this.preguntaResponseRef.unsubscribe();
