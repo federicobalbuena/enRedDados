@@ -1,17 +1,33 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { SalaService } from 'src/app/services/sala.service';
 
 @Component({
   selector: 'app-temporizador',
   templateUrl: './temporizador.component.html',
   styleUrls: ['./temporizador.component.css']
 })
-export class TemporizadorComponent {
+export class TemporizadorComponent implements OnInit{
+  constructor(private _salaService: SalaService) { }
+
+  sala = this._salaService.sala$;
+  enCero : number = 0;
   tiempoRestante: number = 15; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
   colorFondo: string = 'rgb(35, 177, 77)'
   @ViewChild('audio')
   audio!: ElementRef;
   
-    iniciarCuenta() {
+  ngOnInit() {
+    this._salaService.sala$.subscribe({
+
+      next: (sala) => {
+        this.tiempoRestante = sala.dificultad;
+        this.enCero = sala.dificultad;
+      }
+    })
+  }  
+
+
+  iniciarCuenta() {
     let interval = setInterval(() => { // Crea un intervalo que se ejecute cada segundo
 
       this.tiempoRestante > 0 ? this.cuentaAtras() : this.cambioJugador(interval);
@@ -33,7 +49,7 @@ export class TemporizadorComponent {
   cambioJugador(interval: any) {
     this.audio.nativeElement.play();
     this.colorFondo = 'rgb(35, 177, 77)';
-    this.tiempoRestante = 15;
+    this.tiempoRestante = this.enCero;
     clearInterval(interval);
     
   }
