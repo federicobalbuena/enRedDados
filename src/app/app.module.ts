@@ -16,6 +16,7 @@ import { GanadorComponent } from './components/ganador/ganador.component';
 import { PodioComponent } from './components/podio/podio.component';
 import { PartidaComponent } from './components/partida/partida.component';
 import { PreguntaService } from './services/pregunta.service';
+import { SalaService } from './services/sala.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PreguntaService } from './services/pregunta.service';
     HttpClientModule
   ],
   providers: [
-    PreguntaService
+    PreguntaService,
+    SalaService
   ],
   bootstrap: [AppComponent]
 })
