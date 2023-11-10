@@ -9,9 +9,8 @@ import { SalaService } from 'src/app/services/sala.service';
 export class TemporizadorComponent implements OnInit{
   constructor(private _salaService: SalaService) { }
 
-  sala = this._salaService.sala$;
-  enCero : number = 0;
-  tiempoRestante: number = 15; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
+  tempInicial : number = 0;
+  tiempoRestante: number = 0; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
   colorFondo: string = 'rgb(35, 177, 77)'
   @ViewChild('audio')
   audio!: ElementRef;
@@ -21,9 +20,15 @@ export class TemporizadorComponent implements OnInit{
 
       next: (sala) => {
         this.tiempoRestante = sala.dificultad;
-        this.enCero = sala.dificultad;
+        this.tempInicial = sala.dificultad;
       }
     })
+
+     // Con el subscribe escuchamos si la variable sufrió algún cambio
+     this._salaService.initTemporizador$.subscribe(init => {
+      if(init)
+      this.iniciarCuenta();
+    });
   }  
 
 
@@ -49,7 +54,7 @@ export class TemporizadorComponent implements OnInit{
   cambioJugador(interval: any) {
     this.audio.nativeElement.play();
     this.colorFondo = 'rgb(35, 177, 77)';
-    this.tiempoRestante = this.enCero;
+    this.tiempoRestante = this.tempInicial;
     clearInterval(interval);
     
   }
