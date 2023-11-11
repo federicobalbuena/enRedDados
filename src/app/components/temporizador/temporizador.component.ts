@@ -12,7 +12,9 @@ export class TemporizadorComponent implements OnInit{
   tempInicial : number = 0;
   tiempoRestante: number = 0; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
   colorFondo: string = 'rgb(35, 177, 77)'
+  
   @ViewChild('audio')
+  
   audio!: ElementRef;
   
   ngOnInit() {
@@ -55,6 +57,7 @@ export class TemporizadorComponent implements OnInit{
     this.audio.nativeElement.play();
     this.colorFondo = 'rgb(35, 177, 77)';
     this.tiempoRestante = this.tempInicial;
+    
     clearInterval(interval);
     
   }
