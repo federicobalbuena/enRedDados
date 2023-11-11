@@ -21,8 +21,8 @@ export class PreguntaService {
 
   public sala$ = new BehaviorSubject<Sala>(new Sala());
 
-
   url = "http:///api/PreguntasCDM/";
+
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
   

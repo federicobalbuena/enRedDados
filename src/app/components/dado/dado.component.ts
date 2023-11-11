@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { PreguntaResponse } from 'src/app/models/preguntaResponse';
 import { PreguntaService } from 'src/app/services/pregunta.service';
+import { SalaService } from 'src/app/services/sala.service';
 
 @Component({
   selector: 'app-dado',
@@ -18,7 +19,8 @@ export class DadoComponent implements OnInit {
   constructor(
     private location: Location,
     private router: Router,
-    private _preguntaService: PreguntaService
+    private _preguntaService: PreguntaService,
+    private _salaService: SalaService
   ) { }
 
   obtenerPregunta() {
@@ -32,7 +34,8 @@ export class DadoComponent implements OnInit {
         this.preguntaResponse.respuesta = data.respuesta;
 
         this._preguntaService.setPreguntaResponse(this.preguntaResponse)
-        console.log(this.preguntaResponse)
+        console.log(this.preguntaResponse);
+        this._salaService.initTemporizador$.next(true);
 
 
       }, error: err => {
@@ -42,7 +45,7 @@ export class DadoComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     let time = 2;
     let randomValue: Number;
     const dado: HTMLElement = document.querySelector('.dado') as HTMLElement;
