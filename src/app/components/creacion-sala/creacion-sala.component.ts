@@ -13,9 +13,16 @@ export class CreacionSalaComponent {
 
   constructor(private _salaService: SalaService) { }
 
-  jugadores = [new Jugador("Jugador 1", true)];
-  sala = new Sala(this.jugadores, "Solitario", 20);
+  //Solitario
+  //jugadores = [new Jugador("Jugador 1", true)];
+  //sala = new Sala(this.jugadores, "Solitario", 20);
 
+  //Multijugador
+  //jugadores = [new Jugador("Jugador 1", false), new Jugador( "Jugador 2", true)];
+  //jugadores = [new Jugador("Jugador 1", false), new Jugador( "Jugador 2", true),new Jugador("Jugador 3", false)];
+  jugadores = [new Jugador("Jugador 1", false), new Jugador( "Jugador 2", false),new Jugador("Jugador 3", false), new Jugador( "Jugador 4", true)];
+  sala = new Sala(this.jugadores, "Solitario", 10); 
+  
   iniciarPartida() {
 
     if ((document.getElementById("nombreJugador") as HTMLInputElement).value != "") {
