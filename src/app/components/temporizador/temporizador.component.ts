@@ -7,6 +7,7 @@ import { SalaService } from 'src/app/services/sala.service';
   styleUrls: ['./temporizador.component.css']
 })
 export class TemporizadorComponent implements OnInit{
+  
   constructor(private _salaService: SalaService) { }
 
   tempInicial : number = 0;

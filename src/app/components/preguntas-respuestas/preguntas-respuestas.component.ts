@@ -30,4 +30,15 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
       this.preguntaResponseRef.unsubscribe();
   }
 
+  pepearRespuesta(){
+    let respuesta = document.getElementsByName("optionsRadios") as NodeListOf<HTMLInputElement>;
+      respuesta.forEach(c => {
+        if (c.checked && c.value == "true") {
+         return true; 
+        }
+      return false;
+      });
+      
+    }
+
 }

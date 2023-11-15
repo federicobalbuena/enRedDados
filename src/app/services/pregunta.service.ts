@@ -21,7 +21,7 @@ export class PreguntaService {
 
   public sala$ = new BehaviorSubject<Sala>(new Sala());
 
-  url = "http:///api/PreguntasCDM/";
+  url = "https://localhost:44362/api/PreguntasCDM/";
 
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
@@ -44,5 +44,7 @@ export class PreguntaService {
   setPreguntaResponse(obj: PreguntaResponse) {
     this.preguntaResponseSubject.next(obj)
   }
+
+  
 
 }

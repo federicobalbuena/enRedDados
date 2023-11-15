@@ -13,7 +13,11 @@ export class CreacionSalaComponent {
 
   constructor(private _salaService: SalaService) { }
 
-  jugadores = [new Jugador("Jugador 1", true)];
+  jugadores = [new Jugador("Jugador 1", true, true),
+  new Jugador("Jugador 2", true, false),
+  new Jugador("Jugador 3", true, false),
+  new Jugador("Jugador 4", true, false)];
+
   sala = new Sala(this.jugadores, "Solitario", 20);
 
   iniciarPartida() {
@@ -25,7 +29,7 @@ export class CreacionSalaComponent {
     if ((document.getElementById("multijugador") as HTMLInputElement).checked) {
       this.sala.modoDeJuego = (document.getElementById("multijugador") as HTMLInputElement).value;
     }
-
+    
     if ((document.getElementById("medio") as HTMLInputElement).checked) {
       this.sala.dificultad = 15;
     }

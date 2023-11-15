@@ -20,6 +20,8 @@ export class SalaService {
   
   constructor(private http: HttpClient) { }
 
-  
+  responder(){
+    
+  }  
 
 }
