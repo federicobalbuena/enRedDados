@@ -9,94 +9,104 @@ import { Jugador } from 'src/app/models/jugador';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
+  router: any;
 
   constructor(private _salaService: SalaService,) { }
 
-
-  // jugador = (document.getElementById("jugador") as HTMLInputElement).value;
-
-  
-
-  _sala : Sala = new Sala;
-  jugadores : Jugador[] = [new Jugador()];
-
+  _sala: Sala = new Sala;
+  jugadores: Jugador[] = [new Jugador()];
+  respuestaSeleccionada: boolean = false;
+  fichasActivas: HTMLElement[] = [];
+  cantidadDeJugadores = 0;
+  primerPuesto: string ="";
+  segundoPuesto: string ="";
+  tercerPuesto: string ="";
   ngOnInit() {
 
-    let fichaOculta2 = document.getElementById("ficha2") as HTMLElement;
-    let fichaOculta3 = document.getElementById("ficha3") as HTMLElement;
-    let fichaOculta4 = document.getElementById("ficha4") as HTMLElement;
+    let ficha1 = document.getElementById("ficha1") as HTMLElement;
+    let ficha2 = document.getElementById("ficha2") as HTMLElement;
+    let ficha3 = document.getElementById("ficha3") as HTMLElement;
+    let ficha4 = document.getElementById("ficha4") as HTMLElement;
+    let fichas = [ficha1, ficha2, ficha3, ficha4];
+    let cantidadDeJugadores = 4;
 
     this._salaService.sala$.subscribe({
 
       next: (sala) => {
         this._sala = sala
-        this.jugadores = sala.jugadores
+        this.jugadores = sala.jugadores;
+        
         if (sala.modoDeJuego == "Solitario") {
-          fichaOculta2.style.visibility = "hidden";
-          fichaOculta3.style.visibility = "hidden";
-          fichaOculta4.style.visibility = "hidden";
+          ficha1.style.visibility = "visible";
+          this.fichasActivas = [ficha1];
+          this.cantidadDeJugadores = 1;
+
+          for (let index = 1; index < this.jugadores.length; index++) {
+            this.jugadores[index].participa = false;
+          }
+        } else {
+          this.cantidadDeJugadores = cantidadDeJugadores;
+
+          for (let index = 0; index < this.cantidadDeJugadores; index++) {
+            this.jugadores[index].participa = true;
+            fichas[index].style.visibility = "visible";
+            this.fichasActivas[index] = fichas[index];
+          }
+        }
+        console.log(JSON.stringify(this.jugadores));
+
+        if (sala.modoDeJuego == "Solitario") {
+          ficha2.style.visibility = "hidden";
+          ficha3.style.visibility = "hidden";
+          ficha4.style.visibility = "hidden";
+          this.jugadores = sala.jugadores;
+        } else {
+          for (let index = 0; index < sala.jugadores.length; index++) {
+            if (sala.jugadores[index].participa == true) {
+              this.jugadores[index] = sala.jugadores[index];
+              if (fichas[index].style.visibility == "visible") {
+                this.fichasActivas[index] = fichas[index];
+              }
+            }
+          }
         }
       }
-      
     })
   }
-  
+
   responder(esCorrecta: boolean) {
-    
-  let ficha1 = document.getElementById("ficha1") as HTMLElement;
-  let ficha2 = document.getElementById("ficha2") as HTMLElement;
-  let ficha3 = document.getElementById("ficha3") as HTMLElement;
-  let ficha4 = document.getElementById("ficha4") as HTMLElement;
-  let fichas = [ficha1, ficha2, ficha3, ficha4];
-  console.log("entre a responder" + typeof(this.jugadores) + typeof(fichas))
-    //let jugador = (document.getElementById("jugador") as HTMLInputElement).value;
+
     let cantidad = 3;
-    //console.log(jugador);
 
     for (let index = 0; index < this.jugadores.length; index++) {
 
-      if (this.jugadores[index].participa && this.jugadores[index].turno) {
-        console.log("Es el turno de " + this.jugadores[index].nombreJugador);
+      if (this.jugadores[index].turno) {
         if (esCorrecta) {
-          avanzar(fichas[index], cantidad)
-          console.log(this.jugadores[index].nombreJugador + " respondio bien");
-          index = index --;
+          avanzar(this.fichasActivas[index], cantidad)
+          this.jugadores[index].puntos = this.jugadores[index].puntos + 3;
+          console.log("El jugador " + this.jugadores[index].nombreJugador +" tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
+          this.jugadores[index].puntos >= 18 ? this.ganarPartida() : "";
+          index = index--;
         } else {
-          retroceder(fichas[index]);
+          retroceder(this.fichasActivas[index]);
           this.jugadores[index].turno = false;
-          let pepe : number = index + 1;
-          if (pepe == this.jugadores.length) {
+          if (this.jugadores[index].puntos > 0) {
+            this.jugadores[index].puntos = this.jugadores[index].puntos -1;
+          }
+          console.log("El jugador " + this.jugadores[index].nombreJugador +" tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
+          let pepe: number = index + 1;
+          if (pepe == this.cantidadDeJugadores) {
             this.jugadores[0].turno = true;
             index = 0;
-          console.log(this.jugadores[index].nombreJugador + " respondio mal" + " turno " + this.jugadores[index].turno)
           } else {
             this.jugadores[pepe].turno = true;
           }
           break
         }
-
       }
-
     }
 
-    /* switch (jugador) {
-      case "1":
-        esCorrecta ? avanzar(ficha1, cantidad) : retroceder(ficha1);
-        break;
-      case "2":
-        esCorrecta ? avanzar(ficha2, cantidad) : retroceder(ficha2)
-        break;
-      case "3":
-        esCorrecta ? avanzar(ficha3, cantidad) : retroceder(ficha3)
-        break;
-      case "4":
-        esCorrecta ? avanzar(ficha4, cantidad) : retroceder(ficha4)
-        break;
-
-    } */
-
     function avanzar(ficha: HTMLElement, cantidad: number) {
-      console.log("Estoy avanzando" + ficha)
       for (let index = 0; index < cantidad; index++) {
         let nextDivFicha = ficha.parentElement?.nextElementSibling;
         nextDivFicha?.appendChild(ficha);
@@ -104,9 +114,17 @@ export class TableroComponent implements OnInit {
     }
 
     function retroceder(ficha: HTMLElement) {
-      console.log("Estoy retrocediendo" + ficha)
       let prevDivFicha = ficha.parentElement?.previousElementSibling;
       prevDivFicha?.appendChild(ficha);
     }
+  }
+
+  ganarPartida(){
+    //Hacer un metodo que ordene de mayor a menor los jugadores de acuerdo a los puntos que tienen
+    let podio = this.jugadores.sort((a, b) => b.puntos - a.puntos);
+    console.log("El primer puesto es para " + podio[0].nombreJugador);
+    console.log("El segundo puesto es para " + podio[1].nombreJugador);
+    console.log("El tercer puesto es para " + podio[2].nombreJugador);
+    
   }
 }

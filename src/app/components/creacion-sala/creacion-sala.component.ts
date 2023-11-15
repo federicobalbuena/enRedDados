@@ -14,9 +14,9 @@ export class CreacionSalaComponent {
   constructor(private _salaService: SalaService) { }
 
   jugadores = [new Jugador("Jugador 1", true, true),
-  new Jugador("Jugador 2", true, false),
-  new Jugador("Jugador 3", true, false),
-  new Jugador("Jugador 4", true, false)];
+  new Jugador("Jugador 2", false, false),
+  new Jugador("Jugador 3", false, false),
+  new Jugador("Jugador 4", false, false)];
 
   sala = new Sala(this.jugadores, "Solitario", 20);
 

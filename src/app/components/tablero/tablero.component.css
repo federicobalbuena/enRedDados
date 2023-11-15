@@ -29,28 +29,28 @@
         bottom: 145px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;     
+        visibility: hidden;     
     }
 
     #ficha2 {
         bottom: 143px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;
+        visibility: hidden;
     }
 
     #ficha3 {
         bottom: 141px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;
+        visibility: hidden;
     }
 
     #ficha4 {
         bottom: 139px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;
+        visibility: hidden;
     }
 
     #cajaGen {
