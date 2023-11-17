@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
@@ -17,6 +19,8 @@ import { PodioComponent } from './components/podio/podio.component';
 import { PartidaComponent } from './components/partida/partida.component';
 import { PreguntaService } from './services/pregunta.service';
 import { SalaService } from './services/sala.service';
+
+//const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 @NgModule({
   declarations: [
@@ -35,11 +39,13 @@ import { SalaService } from './services/sala.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SocketIoModule,//.forRoot(config),
     HttpClientModule
   ],
   providers: [
     PreguntaService,
-    SalaService
+    SalaService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
