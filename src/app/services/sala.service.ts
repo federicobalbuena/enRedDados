@@ -12,10 +12,10 @@ export class SalaService {
   public initTemporizador$ = new BehaviorSubject<boolean>(false);
   
   public sala$ = new BehaviorSubject<Sala>(new Sala());
-  public respuesta$ = new BehaviorSubject<boolean>(false);
+  public respuestaCorrecta$ = new BehaviorSubject<boolean>(false);
+  public respondio$= new BehaviorSubject<boolean>(false);
 
-
-/*   url = "http:///api/PreguntasCDM/";
+  /*   url = "http:///api/PreguntasCDM/";
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) }; */
  
   

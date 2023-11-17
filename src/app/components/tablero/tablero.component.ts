@@ -74,11 +74,20 @@ export class TableroComponent implements OnInit {
         }
       }
     })
+    
+    this._salaService.respuestaCorrecta$.subscribe({
+
+      next: (respondioCorrectamente) => {
+        this.responder(respondioCorrectamente);
+      }
+    })
   }
 
   @ViewChild('audio')
 
   audio!: ElementRef;
+
+  
 
   responder(esCorrecta: boolean) {
 

@@ -20,6 +20,7 @@ export class PreguntaService {
   public mostrarMensaje$ = new BehaviorSubject<boolean>(false); */
 
   public sala$ = new BehaviorSubject<Sala>(new Sala());
+  public pregunta$ = new BehaviorSubject<Boolean>(false);
 
   url = "https://localhost:44362/api/PreguntasCDM/";
 

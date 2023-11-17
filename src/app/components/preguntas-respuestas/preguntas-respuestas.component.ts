@@ -13,7 +13,7 @@ import { SalaService } from 'src/app/services/sala.service';
 export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
   respuestasList: Respuesta[] = []
   pregunta: string = ""
-
+  respondio = false;
 
   @Output() onComplete = new EventEmitter<void>();
   private preguntaResponseRef: Subscription = new Subscription;
@@ -24,39 +24,68 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.timer.restartCountdown(this.init); 
+    let pregunta = document.getElementById("pregunta") as HTMLElement;
+    let txtPregunta = document.getElementById("txtPregunta") as HTMLInputElement;
+
     this.preguntaResponseRef = this._preguntaService.preguntaResponse.subscribe(
       res => {
         this.respuestasList = res.respuesta;
-        this.pregunta = res.pregunta;
+        this.pregunta = `Pregunta: ${res.pregunta}`;
         this.onComplete.emit()
       });
+
+      this._salaService.respondio$.subscribe({
+        next: (respuesta) => {
+          this.respondio = respuesta;
+      }})
+      
+      this._salaService.respuestaCorrecta$.subscribe({
+
+        next: (respondioCorrectamente) => {
+          if (this.respondio) {
+            pregunta.style.visibility = "hidden";
+            this._salaService.respondio$.next(false);
+            limpiarCampos();
+          }
+        }
+      })
+
+      this._preguntaService.pregunta$.subscribe({
+
+        next: (vioPregunta) => {
+          vioPregunta? pregunta.style.visibility ="visible" : pregunta.style.visibility ="hidden";
+        }
+      })
+
+      function limpiarCampos() {
+        txtPregunta.value = "";
+    
+      }
   }
+
   ngOnDestroy() {
     this.preguntaResponseRef.unsubscribe();
   }
+  
+  
+  
+  validarRespuesta() {
+    this._preguntaService.pregunta$.next(false);
+    this._salaService.respondio$.next(true);
+    let respuesta = document.getElementsByName("optionsRadios") as NodeListOf<HTMLInputElement>;
+    var respondioCorrectamente: Boolean = false
 
-  pepearRespuesta() {
-
-    /* let respuesta = document.getElementsByName("optionsRadios") as NodeListOf<HTMLInputElement>;
-      respuesta.forEach(c => {
+    respuesta.forEach(c => {
         if (c.checked && c.value == "true") {
          console.log("respuesta correcta");
+         respondioCorrectamente = true;
         }
-        console.log("respuesta incorrecta");
-      return false;
       });
-       */
-
-    let listado = document.getElementById("listaRespuestas") as HTMLInputElement;
-    
-    for (let index = 0; index < this.respuestasList.length; index++) {
-      if (listado.checked && this.respuestasList[index].esLaCorrecta) {
-        console.log("respuesta correcta");
-      } else {
-        console.log("respuesta incorrecta");
-      };
-      
-    }
+      console.log(respondioCorrectamente == true ? true : false) 
+      this._salaService.respuestaCorrecta$.next(respondioCorrectamente == true ? true : false)
+      //TODO
+      //llamar al método que avanza o retrocede según respuesta correcta
+      //pasarle como parametro respondioCorrectamente == true ? true : false
   }
 
 }
