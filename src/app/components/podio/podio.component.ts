@@ -14,8 +14,4 @@ export class PodioComponent {
   primero = this.ganadores[0].nombreJugador;
   segundo = this.ganadores[1].nombreJugador;
   tercero = this.ganadores[2].nombreJugador;
-  
- 
-
-  
 }
