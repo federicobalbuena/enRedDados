@@ -6,18 +6,18 @@ import { SalaService } from 'src/app/services/sala.service';
   templateUrl: './temporizador.component.html',
   styleUrls: ['./temporizador.component.css']
 })
-export class TemporizadorComponent implements OnInit{
-  
+export class TemporizadorComponent implements OnInit {
+
   constructor(private _salaService: SalaService) { }
 
-  tempInicial : number = 0;
+  tempInicial: number = 0;
   tiempoRestante: number = 0; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
   colorFondo: string = 'rgb(35, 177, 77)'
-  
+
   @ViewChild('audio')
-  
+
   audio!: ElementRef;
-  
+
   ngOnInit() {
     this._salaService.sala$.subscribe({
 
@@ -27,19 +27,25 @@ export class TemporizadorComponent implements OnInit{
       }
     })
 
-     // Con el subscribe escuchamos si la variable sufrió algún cambio
-     this._salaService.initTemporizador$.subscribe(init => {
-      if(init)
-      this.iniciarCuenta();
+    // Con el subscribe escuchamos si la variable sufrió algún cambio
+    this._salaService.initTemporizador$.subscribe(init => {
+      if (init)
+        this.iniciarCuenta();
     });
-  }  
+  }
 
 
   iniciarCuenta() {
+    this._salaService.reiniciaTemporizador$.subscribe(init => {
+      if (init)
+        this.reiniciar(interval);
+    });
+
     let interval = setInterval(() => { // Crea un intervalo que se ejecute cada segundo
 
       this.tiempoRestante > 0 ? this.cuentaAtras() : this.cambioJugador(interval);
-      
+
+
     }, 1000); // El segundo parámetro es el tiempo en milisegundos entre cada ejecución
   }
 
@@ -47,10 +53,10 @@ export class TemporizadorComponent implements OnInit{
     this.tiempoRestante--;
     if (this.tiempoRestante < 5) {
       this.colorFondo = 'rgb(254, 45, 57)';
-      
+
     } else if (this.tiempoRestante < 10) {
       this.colorFondo = 'rgb(255, 197, 35)';
-      
+
     }
   }
 
@@ -58,8 +64,14 @@ export class TemporizadorComponent implements OnInit{
     this.audio.nativeElement.play();
     this.colorFondo = 'rgb(35, 177, 77)';
     this.tiempoRestante = this.tempInicial;
-    
+
     clearInterval(interval);
-    
+
+  }
+
+  reiniciar(interval: any) {
+    clearTimeout(interval);
+    this.colorFondo = 'rgb(35, 177, 77)';
+    this.tiempoRestante = this.tempInicial;
   }
 }

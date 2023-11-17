@@ -70,6 +70,8 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
   
   
   validarRespuesta() {
+    this._salaService.reiniciaTemporizador$.next(true);
+    this._salaService.initTemporizador$.next(false);
     this._preguntaService.pregunta$.next(false);
     this._salaService.respondio$.next(true);
     let respuesta = document.getElementsByName("optionsRadios") as NodeListOf<HTMLInputElement>;

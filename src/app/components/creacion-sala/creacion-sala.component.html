@@ -1,4 +1,5 @@
 <h1>Crear sala</h1>
+<div class="crear">
 <div class="form-group">
   <label class="col-form-label mt-4" for="nombreJugador">Ingresa tu nombre</label>
   <input type="text" class="form-control" placeholder="Ingresa tu nombre" id="nombreJugador">
@@ -13,12 +14,23 @@
         Solitario
       </label>
     </div>
+    
     <div class="form-check">
       <input class="form-check-input" type="radio" name="modo-juego" id="multijugador" value="multijugador">
       <label class="form-check-label" for="multijugador">
-        Multijugador
+        Multijugador Red
       </label>
     </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="modo-juego" id="multijugador" value="multijugador">
+      <label class="form-check-label" for="multijugador">
+        Multijugador Local
+      </label>
+    </div>
+    
+    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugaor 2" id="nombreJugador2">
+    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugaor 3" id="nombreJugador3">
+    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugaor 4" id="nombreJugador4">
 
   </fieldset>
 
@@ -71,3 +83,4 @@
   <button type="button" class="btn btn-danger" routerLink="/">Volver</button>
 
 </form>
+</div>

@@ -10,6 +10,7 @@ import { Sala } from '../models/sala';
 export class SalaService {
 
   public initTemporizador$ = new BehaviorSubject<boolean>(false);
+  public reiniciaTemporizador$ = new BehaviorSubject<boolean>(false);
   
   public sala$ = new BehaviorSubject<Sala>(new Sala());
   public respuestaCorrecta$ = new BehaviorSubject<boolean>(false);

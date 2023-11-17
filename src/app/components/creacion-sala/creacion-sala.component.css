@@ -1,8 +1,35 @@
+.crear{
+    margin-left: 2%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-control {
+    width: 20%;
+}
+
 #inputDefault {
     width: 200px;
     margin-bottom: 1%;
 }
 
 #tiempoPersonalizado {
+    visibility: hidden;
+    width: 18%;
+}
+
+#nombreJugador2 {
+    visibility: hidden;
+}
+
+#nombreJugador3 {
+    visibility: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#nombreJugador4 {
     visibility: hidden;
 }
