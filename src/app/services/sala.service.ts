@@ -12,6 +12,7 @@ export class SalaService {
   public initTemporizador$ = new BehaviorSubject<boolean>(false);
   
   public sala$ = new BehaviorSubject<Sala>(new Sala());
+  public respuesta$ = new BehaviorSubject<boolean>(false);
 
 
 /*   url = "http:///api/PreguntasCDM/";

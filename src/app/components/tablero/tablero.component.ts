@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { SalaService } from 'src/app/services/sala.service';
 import { Sala } from 'src/app/models/sala';
 import { Jugador } from 'src/app/models/jugador';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tablero',
@@ -9,18 +10,19 @@ import { Jugador } from 'src/app/models/jugador';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
-  router: any;
-
-  constructor(private _salaService: SalaService,) { }
+  constructor(
+    private _salaService: SalaService,
+    private router: Router) { }
 
   _sala: Sala = new Sala;
   jugadores: Jugador[] = [new Jugador()];
   respuestaSeleccionada: boolean = false;
   fichasActivas: HTMLElement[] = [];
   cantidadDeJugadores = 0;
-  primerPuesto: string ="";
-  segundoPuesto: string ="";
-  tercerPuesto: string ="";
+  primerPuesto: string = "";
+  segundoPuesto: string = "";
+  tercerPuesto: string = "";
+  podio: Jugador[] = [new Jugador()];
   ngOnInit() {
 
     let ficha1 = document.getElementById("ficha1") as HTMLElement;
@@ -35,7 +37,7 @@ export class TableroComponent implements OnInit {
       next: (sala) => {
         this._sala = sala
         this.jugadores = sala.jugadores;
-        
+
         if (sala.modoDeJuego == "Solitario") {
           ficha1.style.visibility = "visible";
           this.fichasActivas = [ficha1];
@@ -74,6 +76,10 @@ export class TableroComponent implements OnInit {
     })
   }
 
+  @ViewChild('audio')
+
+  audio!: ElementRef;
+
   responder(esCorrecta: boolean) {
 
     let cantidad = 3;
@@ -84,16 +90,16 @@ export class TableroComponent implements OnInit {
         if (esCorrecta) {
           avanzar(this.fichasActivas[index], cantidad)
           this.jugadores[index].puntos = this.jugadores[index].puntos + 3;
-          console.log("El jugador " + this.jugadores[index].nombreJugador +" tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
+          console.log("El jugador " + this.jugadores[index].nombreJugador + " tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
           this.jugadores[index].puntos >= 18 ? this.ganarPartida() : "";
           index = index--;
         } else {
           retroceder(this.fichasActivas[index]);
           this.jugadores[index].turno = false;
           if (this.jugadores[index].puntos > 0) {
-            this.jugadores[index].puntos = this.jugadores[index].puntos -1;
+            this.jugadores[index].puntos = this.jugadores[index].puntos - 1;
           }
-          console.log("El jugador " + this.jugadores[index].nombreJugador +" tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
+          console.log("El jugador " + this.jugadores[index].nombreJugador + " tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
           let pepe: number = index + 1;
           if (pepe == this.cantidadDeJugadores) {
             this.jugadores[0].turno = true;
@@ -119,12 +125,18 @@ export class TableroComponent implements OnInit {
     }
   }
 
-  ganarPartida(){
-    //Hacer un metodo que ordene de mayor a menor los jugadores de acuerdo a los puntos que tienen
-    let podio = this.jugadores.sort((a, b) => b.puntos - a.puntos);
-    console.log("El primer puesto es para " + podio[0].nombreJugador);
-    console.log("El segundo puesto es para " + podio[1].nombreJugador);
-    console.log("El tercer puesto es para " + podio[2].nombreJugador);
-    
+  ganarPartida() {
+
+    this.podio = this.jugadores.sort((a, b) => b.puntos - a.puntos);
+    console.log("El primer puesto es para " + this.podio[0].nombreJugador);
+    console.log("El segundo puesto es para " + this.podio[1].nombreJugador);
+    console.log("El tercer puesto es para " + this.podio[2].nombreJugador);
+
+    this.audio.nativeElement.play();
+
+   setTimeout(() => {
+      let queryParams = { queryParams: { array: JSON.stringify(this.podio) } };
+      this.router.navigate(["/podio"], queryParams);
+    }, 4500);
   }
 }
