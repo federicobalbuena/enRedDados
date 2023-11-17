@@ -16,7 +16,7 @@ export class JugadoresComponent implements OnInit { //antes de la llave va imple
   salaActual = new Sala();
 
   //estado: boolean[] = [];//agregado para cambiar las clases en el html
-  
+
 
   ngOnInit() {
 
@@ -26,12 +26,12 @@ export class JugadoresComponent implements OnInit { //antes de la llave va imple
     const jugador_3 = document.getElementById("idJugador3") as HTMLInputElement;
     const jugador_4 = document.getElementById("idJugador4") as HTMLInputElement;
 
-    
+
     //constantes para ocultar o no jugadores
     //const jugador1 = document.getElementById("jugador_1") as HTMLInputElement;
     const jugador2 = document.getElementById("jugador_2") as HTMLInputElement;
     const jugador3 = document.getElementById("jugador_3") as HTMLInputElement;
-    const jugador4 = document.getElementById("jugador_4") as HTMLInputElement; 
+    const jugador4 = document.getElementById("jugador_4") as HTMLInputElement;
 
     function ocultarJugadores() {
       jugador2.style.visibility = "hidden";
@@ -57,9 +57,7 @@ export class JugadoresComponent implements OnInit { //antes de la llave va imple
           // sala.jugadores[2].turno = false;              
           break;
         default:
-          jugador_2.value = sala.jugadores[1].nombreJugador = "Lucas";
-          jugador_3.value = sala.jugadores[2].nombreJugador = "Fede";
-          jugador_4.value = sala.jugadores[3].nombreJugador = "Moni";
+
           // sala.jugadores[0].turno = false;
           // sala.jugadores[1].turno = false;
           // sala.jugadores[2].turno = false;
@@ -74,11 +72,14 @@ export class JugadoresComponent implements OnInit { //antes de la llave va imple
         console.log("Este es el objeto " + JSON.stringify(sala))
 
         jugador_1.value = sala.jugadores[0].nombreJugador;//nombre que escribo en input crear sala
-
+        jugador_2.value = sala.jugadores[1].nombreJugador;
+        jugador_3.value = sala.jugadores[2].nombreJugador;
+        jugador_4.value = sala.jugadores[3].nombreJugador;
+        console.log("estos son los jugadores" + JSON.stringify(sala.jugadores));
         if (sala.modoDeJuego == "Solitario")
           ocultarJugadores();
-        else
-        jugarMultijugador(sala);
+        //else
+        //  jugarMultijugador(sala);
 
         //resalta el jugador que tiene el turno
         // for (let i = 0; i < sala.jugadores.length; i++) {

@@ -22,15 +22,16 @@
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="modo-juego" id="multijugador" value="multijugador">
-      <label class="form-check-label" for="multijugador">
+      <input class="form-check-input" type="radio" name="modo-juego" id="multijugador_local" (click)="jugarMultijugador()" value="multijugador_local">
+      <label class="form-check-label" for="multijugador_local">
         Multijugador Local
       </label>
     </div>
     
-    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugaor 2" id="nombreJugador2">
-    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugaor 3" id="nombreJugador3">
-    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugaor 4" id="nombreJugador4">
+    
+    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 2" id="nombreJugador2">
+    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 3" id="nombreJugador3">
+    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 4" id="nombreJugador4">
 
   </fieldset>
 
@@ -79,8 +80,7 @@
 
   </fieldset>
 
-  <button type="button" class="btn btn-primary" (click)="iniciarPartida()" routerLink="/partida">Crear partida</button>
-  <button type="button" class="btn btn-danger" routerLink="/">Volver</button>
-
+  <button type="button" class="btn btn-primary" (click)="iniciarPartida()" routerLink="/partida" id="btnCrear">Crear partida</button>
+  <button type="button" class="btn btn-danger" routerLink="/" id="btnVolver">Volver</button>
 </form>
 </div>

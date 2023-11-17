@@ -9,6 +9,10 @@
     "tablero tablero tablero tablero";
 }
 
+h1 {
+    text-align: center;
+}
+
 #jugadores {
     grid-area: jugadores;
 }

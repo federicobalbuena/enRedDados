@@ -80,14 +80,14 @@ export class DadoComponent implements OnInit {
             dado.style.transform = `translateY(0px) rotateX(3600deg) rotateY(1980deg) rotateZ(3600deg)`;
             break;
         };
-
-        /* if (nroPregunta.value.length < 3) {
+ 
+        if (nroPregunta.value.length < 3) {
           mostrarResultados()
         } else {
           btnVerPregunta.style.visibility = "hidden";
           nroPregunta.value = "";
-        } */
-        mostrarResultados();
+        }
+        //mostrarResultados();
 
       }, time * 10);
     });

@@ -20,16 +20,19 @@ export class CreacionSalaComponent {
 
   sala = new Sala(this.jugadores, "Solitario", 20);
 
+
   iniciarPartida() {
 
     if ((document.getElementById("nombreJugador") as HTMLInputElement).value != "") {
       this.sala.jugadores[0].nombreJugador = (document.getElementById("nombreJugador") as HTMLInputElement).value;
     }
 
-    if ((document.getElementById("multijugador") as HTMLInputElement).checked) {
-      this.sala.modoDeJuego = (document.getElementById("multijugador") as HTMLInputElement).value;
+    if ((document.getElementById("multijugador_local") as HTMLInputElement).checked) {
+      this.sala.modoDeJuego = (document.getElementById("multijugador_local") as HTMLInputElement).value;
+      this.jugarMultijugador();
+
     }
-    
+
     if ((document.getElementById("medio") as HTMLInputElement).checked) {
       this.sala.dificultad = 15;
     }
@@ -47,6 +50,21 @@ export class CreacionSalaComponent {
     console.log(this.sala.jugadores, this.sala.modoDeJuego, this.sala.dificultad) // Borrar
 
     this._salaService.sala$.next(this.sala)
+  }
+
+  jugarMultijugador() {
+    let jugador_2 = document.getElementById("nombreJugador2") as HTMLInputElement;
+    let jugador_3 = document.getElementById("nombreJugador3") as HTMLInputElement;
+    let jugador_4 = document.getElementById("nombreJugador4") as HTMLInputElement;
+
+    jugador_2.style.visibility = "visible";
+    jugador_3.style.visibility = "visible";
+    jugador_4.style.visibility = "visible";
+
+    this.jugadores[1].nombreJugador = (document.getElementById("nombreJugador2") as HTMLInputElement).value;
+    this.jugadores[2].nombreJugador = (document.getElementById("nombreJugador3") as HTMLInputElement).value;
+    this.jugadores[3].nombreJugador = (document.getElementById("nombreJugador4") as HTMLInputElement).value;
+
   }
 
   personalizar() {

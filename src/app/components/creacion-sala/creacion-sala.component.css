@@ -33,3 +33,7 @@ h1 {
 #nombreJugador4 {
     visibility: hidden;
 }
+
+#btnVolver {
+    margin-left: 10px;
+}
