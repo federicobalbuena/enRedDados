@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { CreacionSalaComponent } from './components/creacion-sala/creacion-sala.component';
@@ -13,6 +15,8 @@ import { TableroComponent } from './components/tablero/tablero.component';
 import { GanadorComponent } from './components/ganador/ganador.component';
 import { PodioComponent } from './components/podio/podio.component';
 import { PartidaComponent } from './components/partida/partida.component';
+import { PreguntaService } from './services/pregunta.service';
+import { SalaService } from './services/sala.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +34,13 @@ import { PartidaComponent } from './components/partida/partida.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PreguntaService,
+    SalaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

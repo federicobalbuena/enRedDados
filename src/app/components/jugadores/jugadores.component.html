@@ -1,2 +1,29 @@
-<p>jugadores works!</p>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat, fuga explicabo odit officiis delectus cum eos voluptate consequatur laudantium ea.</p>
+<div class="container">
+<!-- antes -->
+  <!-- <div class="fancy selected " id="jugador_1">
+    <input class="form-control" type="text" placeholder="Jugador 1" id="idJugador1" readonly="">
+  </div>
+  <div class="fancy" id="jugador_2">
+    <input class="form-control" type="text" placeholder="Jugador 2" id="idJugador2" readonly="">
+  </div>
+  <div class="fancy" id="jugador_3">
+    <input class="form-control" type="text" placeholder="Jugador 3" id="idJugador3" readonly="">
+  </div>
+  <div class="fancy" id="jugador_4">
+    <input class="form-control" type="text" placeholder="Jugador 4" id="idJugador4" readonly="">
+  </div> -->
+
+  <!-- nuevo -->
+  <div [ngClass]="salaActual.jugadores[0].turno ? 'fancy' : 'fancyNo'"  id="jugador_1">
+    <input class="form-control" type="text" placeholder="Jugador 1" id="idJugador1" readonly="">
+  </div>
+  <div [ngClass]="salaActual.jugadores[1].turno ? 'fancy' : 'fancyNo'" id="jugador_2">
+    <input class="form-control" type="text" placeholder="Jugador 2" id="idJugador2" readonly="">
+  </div>
+  <div [ngClass]="salaActual.jugadores[2].turno ? 'fancy' : 'fancyNo'" id="jugador_3">
+    <input class="form-control" type="text" placeholder="Jugador 3" id="idJugador3" readonly="">
+  </div>
+  <div [ngClass]="salaActual.jugadores[3].turno ? 'fancy' : 'fancyNo'" id="jugador_4">
+    <input class="form-control" type="text" placeholder="Jugador 4" id="idJugador4" readonly="">
+  </div>
+</div>

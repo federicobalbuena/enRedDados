@@ -1,0 +1,215 @@
+.contenedorDado {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+    perspective: 300px;
+    top: 20px;
+}
+
+.dado {
+    transform: translateY(0px) rotateX(150deg) rotateY(120deg) rotateZ(90deg);
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    visibility: visible;
+}
+
+.dado-cara {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background: rgb(255, 197, 35);
+    border: rgb(102, 25, 42) 5px solid;
+    border-radius: 18%;
+}
+
+.frontal {
+    transform: translateZ(50px);
+}
+
+.trasera {
+    transform: rotateY(180deg) rotateZ(90deg) translateZ(50px);
+}
+
+.izquierda {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+.derecha {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+.superior {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.inferior {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+.inside {
+    display: grid;
+    grid-template-columns: repeat(3, 20px);
+    grid-template-rows: repeat(3, 20px);
+}
+
+.punto {
+    height: 17px;
+    width: 17px;
+    background-color: rgb(254, 45, 57);
+    border: rgb(102, 25, 42) 3px solid;
+    border-radius: 50%;
+    justify-self: center;
+    align-self: center;
+}
+
+.frontal .inside .punto {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.trasera .inside .punto:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.trasera .inside .punto:nth-child(2) {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.trasera .inside .punto:nth-child(3) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.trasera .inside .punto:nth-child(4) {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.trasera .inside .punto:nth-child(5) {
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.trasera .inside .punto:nth-child(6) {
+    grid-row: 3;
+    grid-column: 3;
+}
+
+.izquierda .inside .punto:nth-child(1) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.izquierda .inside .punto:nth-child(2) {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.izquierda .inside .punto:nth-child(3) {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.derecha .inside .punto:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.derecha .inside .punto:nth-child(2) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.derecha .inside .punto:nth-child(3) {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.derecha .inside .punto:nth-child(4) {
+    grid-row: 3;
+    grid-column: 3;
+}
+
+.superior .inside .punto:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.superior .inside .punto:nth-child(2) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.superior .inside .punto:nth-child(3) {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.superior .inside .punto:nth-child(4) {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.superior .inside .punto:nth-child(5) {
+    grid-row: 3;
+    grid-column: 3;
+}
+
+.inferior .inside .punto:nth-child(1) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.inferior .inside .punto:nth-child(2) {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.titulo {
+    width: 75%;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.resultados {
+    margin-top: 2.5rem;
+    text-align: center;
+    color:#32fbe2;
+}
+
+#tituloPregunta {
+    visibility: hidden;
+}
+
+#nroPregunta {
+    background-color: inherit;
+    border: 0px;
+    font-size: 40px;
+    text-align: center;
+    visibility: visible;
+    color:#32fbe2;
+}
+
+.botones {
+    margin-top: 1%;
+    text-align: center;
+}
+
+#btnverpregunta {
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 1%;
+    width: 65%;
+    visibility: hidden;
+}

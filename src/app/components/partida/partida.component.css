@@ -10,26 +10,21 @@
 }
 
 #jugadores {
-    background-color: blueviolet;
     grid-area: jugadores;
 }
 
 #dado {
-    background-color: blue;
     grid-area: dado;
 }
 
 #preg-resp {
-    background-color: forestgreen;
     grid-area: preg-resp;
 }
 
 #temporizador {
-    background-color: darkred;
     grid-area: temporizador;
 }
 
 #tablero {
-    background-color: darkslategrey;
     grid-area: tablero;
 }
