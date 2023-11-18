@@ -1,5 +1,44 @@
-<p>Primer puesto: {{primero}}</p>
-<p>Segundo puesto: {{segundo}}</p>
-<p>Tercer puesto: {{tercero}}</p>
 
 <audio #audio src="../../../assets/Audio/podio.mp3"></audio>
+<div class="container">
+    <!-- <div class="escalera">
+      <span class="badge badge-primary">3</span>
+      <span class="badge badge-primary">2</span>
+      <span class="badge badge-primary">1</span>
+    </div> -->
+
+    <div class="podio">
+        <div class="lugar">
+            <img id="segundo" src="../../../assets/Img/plata.png" alt="" class="img-fluid rounded-circle">
+            <p>Segundo Lugar</p>
+            <p>{{segundo}}</p>
+
+
+          </div>
+      
+      <div class="lugar">
+        <img id ="primero" src="../../../assets/Img/oro.png" alt="oro" class="">
+        <p>Primer Lugar</p>
+        <p>{{primero}}</p>
+      </div>
+
+      <div class="lugar">
+        <img id="tercero" src="../../../assets/Img/bronce.png" alt="" class="img-fluid rounded-circle">
+        <p>Tercer Lugar</p>
+        <p>{{tercero}}</p>
+      </div>
+    </div>
+    
+      <div class="buttons">
+        <button type="button" class="btn btn-primary btn-lg" id="volverAjugar" routerLink="">Volver a jugar</button>   
+      </div>
+
+  
+    
+  </div>
+  
+
+  <!-- Agrega el enlace al archivo JS de Bootstrap y jQuery (opcional)
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->

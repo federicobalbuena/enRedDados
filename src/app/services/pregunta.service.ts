@@ -22,7 +22,7 @@ export class PreguntaService {
   public sala$ = new BehaviorSubject<Sala>(new Sala());
   public pregunta$ = new BehaviorSubject<Boolean>(false);
 
-  url = "https://localhost:44362/api/PreguntasCDM/";
+  url = "http://ec2-3-88-225-111.compute-1.amazonaws.com:44362/api/PreguntasCDM/";
 
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
