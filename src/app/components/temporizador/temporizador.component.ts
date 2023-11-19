@@ -64,6 +64,7 @@ export class TemporizadorComponent implements OnInit {
     this.audio.nativeElement.play();
     this.colorFondo = 'rgb(35, 177, 77)';
     this.tiempoRestante = this.tempInicial;
+    this._salaService.respuestaCorrecta$.next(false);
 
     clearInterval(interval);
 

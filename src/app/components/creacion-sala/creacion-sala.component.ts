@@ -9,7 +9,7 @@ import { Jugador } from 'src/app/models/jugador';
   templateUrl: './creacion-sala.component.html',
   styleUrls: ['./creacion-sala.component.css']
 })
-export class CreacionSalaComponent implements OnInit{
+export class CreacionSalaComponent implements OnInit {
 
   constructor(private _salaService: SalaService) { }
 
@@ -25,9 +25,9 @@ export class CreacionSalaComponent implements OnInit{
     let jugadorHTML2 = document.getElementById("nombreJugador2") as HTMLInputElement;
     let jugadorHTML3 = document.getElementById("nombreJugador3") as HTMLInputElement;
     let jugadorHTML4 = document.getElementById("nombreJugador4") as HTMLInputElement;
-    this.jugadoresHTML = [jugadorHTML1, jugadorHTML2, jugadorHTML3, jugadorHTML4]
+    this.jugadoresHTML = [jugadorHTML1, jugadorHTML2, jugadorHTML3, jugadorHTML4];
   }
-
+  
   iniciarPartida() {
 
     (document.getElementById("nombreJugador1") as HTMLInputElement).value != "" ? this.sala.jugadores[0].nombreJugador = (document.getElementById("nombreJugador1") as HTMLInputElement).value : "";
@@ -58,13 +58,13 @@ export class CreacionSalaComponent implements OnInit{
   ocultarJugadores() {
     for (let index = 1; index < this.jugadoresHTML.length; index++) {
       this.jugadoresHTML[index].style.display = "none";
-     }
+    }
   }
 
   mostrarMultiJugador() {
     for (let index = 1; index < this.jugadoresHTML.length; index++) {
       this.jugadoresHTML[index].style.display = "block";
-     }
+    }
   }
 
   jugarMultijugadorLocal() {
@@ -74,14 +74,14 @@ export class CreacionSalaComponent implements OnInit{
         this.jugadores[index].participa = true;
       }
     }
-    //console.log("Muesto jugadores participantes desde el componente creacion-sala " + JSON.stringify(this.jugadores))
+    //console.log("Muestro jugadores participantes desde el componente creacion-sala " + JSON.stringify(this.jugadores))
   }
 
   jugarMultijugadorRed() {
-    this.sala.modoDeJuego=(document.getElementById("multijugador_red") as HTMLInputElement).value;
-    alert("Acá debe asignar un codigo de sala e ir a la partida multijugador");
+    this.sala.modoDeJuego = (document.getElementById("multijugador_red") as HTMLInputElement).value;
+    alert("¡¡¡Proximamente!!!");
   }
-
+  
   ocultarDificultad() {
     let select = document.getElementById("selectTiempoPersonalizado") as HTMLInputElement
     select.style.display = "none";

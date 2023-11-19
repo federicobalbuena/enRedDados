@@ -46,7 +46,7 @@ export class DadoComponent implements OnInit {
 
   ngOnInit() {
 
-    let time = 2;
+    let time = 1;
     let randomValue: Number;
     const dado: HTMLElement = document.querySelector('.dado') as HTMLElement;
     const nroPregunta = document.getElementById("nroPregunta") as HTMLInputElement;
@@ -89,7 +89,7 @@ export class DadoComponent implements OnInit {
         }
         //mostrarResultados();
 
-      }, time * 10);
+      }, time * 1);
     });
 
     function limpiarCampos() {
@@ -102,7 +102,7 @@ export class DadoComponent implements OnInit {
         nroPregunta.value = nroPregunta.value + randomValue.toString();
         nroPregunta.style.visibility ="visible";
         nroPregunta.value.length == 3 ? btnVerPregunta.style.visibility = "visible" : btnVerPregunta.style.visibility = "hidden";
-      }, 2000);
+      }, 1000);
 
     };
 

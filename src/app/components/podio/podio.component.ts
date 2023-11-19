@@ -1,26 +1,40 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { SalaService } from 'src/app/services/sala.service';
 
 @Component({
   selector: 'app-podio',
   templateUrl: './podio.component.html',
   styleUrls: ['./podio.component.css']
 })
-export class PodioComponent implements OnInit{
-  constructor (private route: ActivatedRoute) {};
-  
+export class PodioComponent implements OnInit {
+  constructor(private _salaService: SalaService,) { };
+
+  primero: string = "";
+  segundo: string = "";
+  tercero: string = "";
+
   @ViewChild('audio')
 
   audio!: ElementRef;
-  
-  ganadores = JSON.parse(this.route.snapshot.queryParams['array']);
-  primero = this.ganadores[0].nombreJugador;
-  segundo = this.ganadores[1].nombreJugador;
-  tercero = this.ganadores[2].nombreJugador;
+
+  podio: string[] = [];
 
   ngOnInit() {
-    
-  }
-  //this.audio.nativeElement.play(); Esto irá dentro del metodo que muestre los ganadores segun la cantidad de participantes
+    this._salaService.podio$.subscribe({
+      next: (podio) => {
+        for (let index = 0; index < podio.length; index++) {
+          this.podio[index] = podio[index];
+        }
+      }
+    })
 
+    this.premiar()
+  }
+
+  premiar() {
+    this.audio.nativeElement.play();
+    this.primero = this.podio[0];
+    this.segundo = this.podio[1];
+    this.tercero = this.podio[2];
+  }
 }

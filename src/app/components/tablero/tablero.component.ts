@@ -2,7 +2,6 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { SalaService } from 'src/app/services/sala.service';
 import { Sala } from 'src/app/models/sala';
 import { Jugador } from 'src/app/models/jugador';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tablero',
@@ -10,9 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
-  constructor(
-    private _salaService: SalaService,
-    private router: Router) { }
+  
+  constructor(private _salaService: SalaService) { }
 
   _sala: Sala = new Sala;
   jugadores: Jugador[] = [new Jugador()];
@@ -27,7 +25,9 @@ export class TableroComponent implements OnInit {
   podio: Jugador[] = [new Jugador()];
   item = 0;
   rnd = 0;
-  posibles: Number[] = []
+  posibles: Number[] = [];
+  mensaje: string = "" // VER POSIBILIDAD DE QUE MUESTRE UN CARTEL AL RESPONDER BIEN O MAL, O QUE HAGA UN SONIDO
+  
   ngOnInit() {
 
     let ficha1 = document.getElementById("ficha1") as HTMLElement;
@@ -75,7 +75,10 @@ export class TableroComponent implements OnInit {
   audio!: ElementRef;
 
   responder(esCorrecta: boolean) {
-
+    // FUNCIONA TODO, SALVO EN MODO MULTIJUGADOR CUANDO SE DEJA UN NOMBRE EN EL MEDIO EN BLANCO,
+    // POR EJEMPLO, SE PONE NOMBRE AL JUGADOR 1 Y EL 3 PERO NO EL 2. SI BIEN EL JUGADOR 2 NO FIGURA
+    // COMO PARTICIPANTE, ROMPE EL CICLO. PIENSO QUE FILTRANDO/ORDENANDO LOS VECTORES DE JUGADORES Y FICHAS SE PUEDE SOLUCIONAR
+    // (HAY DOS VECTORES CREADOS, JUGADORESFILTRADOS Y FICHASACTIVASFILTRADAS)
     let cantidad = 3;
 
     for (let index = 0; index < this.cantidadDeJugadores; index++) {
@@ -122,17 +125,13 @@ export class TableroComponent implements OnInit {
   }
 
   ganarPartida() {
-
+    // FALTA RUTEO PARA EL PODIO
     this.podio = this.jugadores.sort((a, b) => b.puntos - a.puntos);
-    console.log("El primer puesto es para " + this.podio[0].nombreJugador);
-    console.log("El segundo puesto es para " + this.podio[1].nombreJugador);
-    console.log("El tercer puesto es para " + this.podio[2].nombreJugador);
-
+    
+    let podioTXT = [this.podio[0].nombreJugador, this.podio[1].nombreJugador, this.podio[2].nombreJugador]
     this.audio.nativeElement.play();
 
-    setTimeout(() => {
-      let queryParams = { queryParams: { array: JSON.stringify(this.podio) } };
-      this.router.navigate(["/podio"], queryParams);
-    }, 4500);
+    this._salaService.podio$.next(podioTXT)
+    
   }
 }
