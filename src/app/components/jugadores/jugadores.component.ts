@@ -24,12 +24,12 @@ export class JugadoresComponent implements OnInit {
 
     let idJugadores = [idJugador1, idJugador2, idJugador3, idJugador4];
 
-    let jugador_1_Visible = document.getElementById("jugador_1") as HTMLInputElement;
-    let jugador_2_Visible = document.getElementById("jugador_2") as HTMLInputElement;
-    let jugador_3_Visible = document.getElementById("jugador_3") as HTMLInputElement;
-    let jugador_4_Visible = document.getElementById("jugador_4") as HTMLInputElement;
+    let visibilidadJugador1= document.getElementById("jugador_1") as HTMLInputElement;
+    let visibilidadJugador2= document.getElementById("jugador_2") as HTMLInputElement;
+    let visibilidadJugador3= document.getElementById("jugador_3") as HTMLInputElement;
+    let visibilidadJugador4= document.getElementById("jugador_4") as HTMLInputElement;
 
-    let jugadoresVisibles = [jugador_1_Visible, jugador_2_Visible, jugador_3_Visible, jugador_4_Visible];
+    let jugadoresVisibles = [visibilidadJugador1, visibilidadJugador2, visibilidadJugador3, visibilidadJugador4];
 
     this._salaService.sala$.subscribe({
 

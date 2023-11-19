@@ -29,7 +29,7 @@
         bottom: 145px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: hidden;     
+        visibility: visible;     
     }
 
     #ficha2 {

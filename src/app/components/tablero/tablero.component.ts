@@ -16,13 +16,18 @@ export class TableroComponent implements OnInit {
 
   _sala: Sala = new Sala;
   jugadores: Jugador[] = [new Jugador()];
+  jugadoresFiltrados: Jugador[] = [new Jugador()];
   respuestaSeleccionada: boolean = false;
   fichasActivas: HTMLElement[] = [];
+  fichasActivasFiltradas: HTMLElement[] = [];
   cantidadDeJugadores = 0;
   primerPuesto: string = "";
   segundoPuesto: string = "";
   tercerPuesto: string = "";
   podio: Jugador[] = [new Jugador()];
+  item = 0;
+  rnd = 0;
+  posibles: Number[] = []
   ngOnInit() {
 
     let ficha1 = document.getElementById("ficha1") as HTMLElement;
@@ -30,51 +35,33 @@ export class TableroComponent implements OnInit {
     let ficha3 = document.getElementById("ficha3") as HTMLElement;
     let ficha4 = document.getElementById("ficha4") as HTMLElement;
     let fichas = [ficha1, ficha2, ficha3, ficha4];
-    let cantidadDeJugadores = 4;
-
+    
     this._salaService.sala$.subscribe({
 
       next: (sala) => {
         this._sala = sala
         this.jugadores = sala.jugadores;
+        console.log("Juegan estos jugadores: " + JSON.stringify(sala.jugadores));
 
-        if (sala.modoDeJuego == "Solitario") {
-          ficha1.style.visibility = "visible";
-          this.fichasActivas = [ficha1];
-          this.cantidadDeJugadores = 1;
-
-          for (let index = 1; index < this.jugadores.length; index++) {
-            this.jugadores[index].participa = false;
-          }
-        } else {
-          this.cantidadDeJugadores = cantidadDeJugadores;
-
-          for (let index = 0; index < this.cantidadDeJugadores; index++) {
-            this.jugadores[index].participa = true;
+        for (let index = 0; index < this.jugadores.length; index++) {
+          if (this.jugadores[index].participa == true) {
+            this.cantidadDeJugadores++
             fichas[index].style.visibility = "visible";
             this.fichasActivas[index] = fichas[index];
-          }
+            this.posibles.push(this.item);
+            this.item++;
+          };
         }
-        console.log(JSON.stringify(this.jugadores));
 
-        if (sala.modoDeJuego == "Solitario") {
-          ficha2.style.visibility = "hidden";
-          ficha3.style.visibility = "hidden";
-          ficha4.style.visibility = "hidden";
-          this.jugadores = sala.jugadores;
-        } else {
-          for (let index = 0; index < sala.jugadores.length; index++) {
-            if (sala.jugadores[index].participa == true) {
-              this.jugadores[index] = sala.jugadores[index];
-              if (fichas[index].style.visibility == "visible") {
-                this.fichasActivas[index] = fichas[index];
-              }
-            }
-          }
-        }
+        this.rnd = Math.floor(Math.random() * this.posibles.length);
+        this.jugadores[this.rnd].turno = true;
+
+        //console.log("Juegan estos jugadores: " + JSON.stringify(sala.jugadores));
+        //console.log(`Es el turno del jugador ${this.rnd}`)
+        //console.log(`Juegan ${this.cantidadDeJugadores} de jugadores`);
       }
     })
-    
+
     this._salaService.respuestaCorrecta$.subscribe({
 
       next: (respondioCorrectamente) => {
@@ -87,21 +74,19 @@ export class TableroComponent implements OnInit {
 
   audio!: ElementRef;
 
-  
-
   responder(esCorrecta: boolean) {
 
     let cantidad = 3;
 
-    for (let index = 0; index < this.jugadores.length; index++) {
-
+    for (let index = 0; index < this.cantidadDeJugadores; index++) {
       if (this.jugadores[index].turno) {
+        console.log("es el turno del jugador " + this.jugadores[index].nombreJugador)
         if (esCorrecta) {
-          avanzar(this.fichasActivas[index], cantidad)
+          avanzar(this.fichasActivas[index], cantidad);
           this.jugadores[index].puntos = this.jugadores[index].puntos + 3;
-          console.log("El jugador " + this.jugadores[index].nombreJugador + " tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
           this.jugadores[index].puntos >= 18 ? this.ganarPartida() : "";
           index = index--;
+          console.log(`el jugador ${this.jugadores[index].nombreJugador} tiene ${this.jugadores[index].puntos} puntos.`)
         } else {
           retroceder(this.fichasActivas[index]);
           this.jugadores[index].turno = false;
@@ -118,7 +103,9 @@ export class TableroComponent implements OnInit {
           }
           break
         }
+
       }
+
     }
 
     function avanzar(ficha: HTMLElement, cantidad: number) {
@@ -143,7 +130,7 @@ export class TableroComponent implements OnInit {
 
     this.audio.nativeElement.play();
 
-   setTimeout(() => {
+    setTimeout(() => {
       let queryParams = { queryParams: { array: JSON.stringify(this.podio) } };
       this.router.navigate(["/podio"], queryParams);
     }, 4500);
