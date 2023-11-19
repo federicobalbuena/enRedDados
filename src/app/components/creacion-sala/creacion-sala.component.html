@@ -1,86 +1,95 @@
 <h1>Crear sala</h1>
 <div class="crear">
-<div class="form-group">
-  <label class="col-form-label mt-4" for="nombreJugador">Ingresa tu nombre</label>
-  <input type="text" class="form-control" placeholder="Ingresa tu nombre" id="nombreJugador">
-</div>
+  <div class="form-group">
+    <legend class="mt-4" for="nombreJugador">Ingresa tu nombre</legend>
+    <input type="text" class="form-control" placeholder="Ingresa tu nombre" id="nombreJugador1">
+  </div>
 
-<form>
-  <fieldset class="form-group">
-    <legend class="mt-4">Modo de juego</legend>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="modo-juego" id="solitario" value="solitario" checked="">
-      <label class="form-check-label" for="solitario">
-        Solitario
-      </label>
-    </div>
-    
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="modo-juego" id="multijugador" value="multijugador">
-      <label class="form-check-label" for="multijugador">
-        Multijugador Red
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="modo-juego" id="multijugador_local" (click)="jugarMultijugador()" value="multijugador_local">
-      <label class="form-check-label" for="multijugador_local">
-        Multijugador Local
-      </label>
-    </div>
-    
-    
-    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 2" id="nombreJugador2">
-    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 3" id="nombreJugador3">
-    <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 4" id="nombreJugador4">
+  <form>
+    <fieldset class="form-group">
+      <legend class="mt-4">Modo de juego</legend>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="modo-juego" id="solitario" value="solitario" (click)="ocultarJugadores()" checked="">
+        <label class="form-check-label" for="solitario">
+          Solitario
+        </label>
+      </div>
 
-  </fieldset>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="modo-juego" id="multijugador_red" (click)="ocultarJugadores()" value="multijugador_red">
+        <label class="form-check-label" for="multijugador_red">
+          Multijugador Red
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="modo-juego" id="multijugador_local"
+        (click)="mostrarMultiJugador()" value="multijugador_local">
+        <label class="form-check-label" for="multijugador_local">
+          Multijugador Local
+        </label>
+        <select class="form-select" id="selectMultijugadorLocal">
+          <option value="0" disabled selected>Cuantos jugadores?</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
 
 
-  <fieldset class="form-group">
-    <legend class="mt-4">Dificultad</legend>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="dificultad" id="facil" value="facil" checked="">
-      <label class="form-check-label" for="facil">
-        Facil (20")
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="dificultad" id="medio" value="medio">
-      <label class="form-check-label" for="medio">
-        Medio (15")
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="dificultad" id="dificil" value="dificil">
-      <label class="form-check-label" for="dificil">
-        Dificil (10")
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="dificultad" id="random" value="random">
-      <label class="form-check-label" for="random">
-        Random (dificultar aleatoria)
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="dificultad" id="personalizado" (click)="personalizar()" value="personalizado">
-      <label class="form-check-label" for="personalizado">
-        Personalizado
-      </label>
-      <select class="form-select" id="tiempoPersonalizado">
-        <option value="0" disabled selected>Elegi uno</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="25">25</option>
-        <option value="30">30</option>
-      </select>
-    </div>
+      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 2" id="nombreJugador2">
+      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 3" id="nombreJugador3">
+      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 4" id="nombreJugador4">
 
-  </fieldset>
+    </fieldset>
 
-  <button type="button" class="btn btn-primary" (click)="iniciarPartida()" routerLink="/partida" id="btnCrear">Crear partida</button>
-  <button type="button" class="btn btn-danger" routerLink="/" id="btnVolver">Volver</button>
-</form>
+
+    <fieldset class="form-group">
+      <legend class="mt-4">Dificultad</legend>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="dificultad" id="facil" value="facil" (click)="ocultarDificultad()" checked="">
+        <label class="form-check-label" for="facil">
+          Facil (20")
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="dificultad" id="medio" (click)="ocultarDificultad()" value="medio">
+        <label class="form-check-label" for="medio">
+          Medio (15")
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="dificultad" id="dificil" (click)="ocultarDificultad()" value="dificil">
+        <label class="form-check-label" for="dificil">
+          Dificil (10")
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="dificultad" id="random" (click)="ocultarDificultad()" value="random">
+        <label class="form-check-label" for="random">
+          Random (dificultar aleatoria)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="dificultad" id="personalizado" (click)="personalizar()"
+          value="personalizado">
+        <label class="form-check-label" for="personalizado">
+          Personalizado
+        </label>
+        <select class="form-select" id="selectTiempoPersonalizado">
+          <option value="0" disabled selected>Elegi uno</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+
+    </fieldset>
+
+    <button type="button" class="btn btn-primary" (click)="iniciarPartida()" routerLink="/partida" id="btnCrear">Crear
+      partida</button>
+    <button type="button" class="btn btn-danger" routerLink="/" id="btnVolver">Volver</button>
+  </form>
 </div>

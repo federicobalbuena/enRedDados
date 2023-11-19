@@ -13,65 +13,90 @@ export class CreacionSalaComponent {
 
   constructor(private _salaService: SalaService) { }
 
-  jugadores = [new Jugador("Jugador 1", true, true),
-  new Jugador("Jugador 2", false, false),
-  new Jugador("Jugador 3", false, false),
-  new Jugador("Jugador 4", false, false)];
+  jugadores = [new Jugador("Jugador 1", true, true, 0, false),
+  new Jugador("Jugador 2", false, false, 0, false),
+  new Jugador("Jugador 3", false, false, 0, false),
+  new Jugador("Jugador 4", false, false, 0, false)];
 
   sala = new Sala(this.jugadores, "Solitario", 20);
-
-
+ 
   iniciarPartida() {
 
-    if ((document.getElementById("nombreJugador") as HTMLInputElement).value != "") {
-      this.sala.jugadores[0].nombreJugador = (document.getElementById("nombreJugador") as HTMLInputElement).value;
-    }
+    (document.getElementById("nombreJugador1") as HTMLInputElement).value != "" ? this.sala.jugadores[0].nombreJugador = (document.getElementById("nombreJugador1") as HTMLInputElement).value : "";
 
-    if ((document.getElementById("multijugador_local") as HTMLInputElement).checked) {
-      this.sala.modoDeJuego = (document.getElementById("multijugador_local") as HTMLInputElement).value;
-      this.jugarMultijugador();
+    (document.getElementById("multijugador_local") as HTMLInputElement).checked ? this.jugarMultijugadorLocal() : "";
 
-    }
+    (document.getElementById("multijugador_red") as HTMLInputElement).checked ? this.jugarMultijugadorRed() : "";
 
-    if ((document.getElementById("medio") as HTMLInputElement).checked) {
-      this.sala.dificultad = 15;
-    }
-    if ((document.getElementById("dificil") as HTMLInputElement).checked) {
-      this.sala.dificultad = 10;
-    }
-    if ((document.getElementById("random") as HTMLInputElement).checked) {
-      let posibles = [10, 15, 20];
-      let rnd = Math.floor(Math.random() * posibles.length);
-      this.sala.dificultad = posibles[rnd];
-    }
+    (document.getElementById("medio") as HTMLInputElement).checked ? this.sala.dificultad = 15 : "";
+
+    (document.getElementById("dificil") as HTMLInputElement).checked ? this.sala.dificultad = 10 : "";
+
+    (document.getElementById("random") as HTMLInputElement).checked ? this.establecerRandom() : "";
 
     this.personalizar()
-
-    console.log(this.sala.jugadores, this.sala.modoDeJuego, this.sala.dificultad) // Borrar
 
     this._salaService.sala$.next(this.sala)
   }
 
-  jugarMultijugador() {
-    let jugador_2 = document.getElementById("nombreJugador2") as HTMLInputElement;
-    let jugador_3 = document.getElementById("nombreJugador3") as HTMLInputElement;
-    let jugador_4 = document.getElementById("nombreJugador4") as HTMLInputElement;
+  establecerRandom() {
+    let posibles = [5, 10, 15, 20, 25];
+    let rnd = Math.floor(Math.random() * posibles.length);
+    this.sala.dificultad = posibles[rnd];
+  }
 
-    jugador_2.style.visibility = "visible";
-    jugador_3.style.visibility = "visible";
-    jugador_4.style.visibility = "visible";
+  ocultarJugadores() {
+    let jugadorHTML2 = document.getElementById("nombreJugador2") as HTMLInputElement;
+    let jugadorHTML3 = document.getElementById("nombreJugador3") as HTMLInputElement;
+    let jugadorHTML4 = document.getElementById("nombreJugador4") as HTMLInputElement;
 
-    this.jugadores[1].nombreJugador = (document.getElementById("nombreJugador2") as HTMLInputElement).value;
-    this.jugadores[2].nombreJugador = (document.getElementById("nombreJugador3") as HTMLInputElement).value;
-    this.jugadores[3].nombreJugador = (document.getElementById("nombreJugador4") as HTMLInputElement).value;
+    jugadorHTML2.style.display = "none";
+    jugadorHTML3.style.display = "none";
+    jugadorHTML4.style.display = "none";
+  }
 
+  mostrarMultiJugador() {
+    let jugadorHTML2 = document.getElementById("nombreJugador2") as HTMLInputElement;
+    let jugadorHTML3 = document.getElementById("nombreJugador3") as HTMLInputElement;
+    let jugadorHTML4 = document.getElementById("nombreJugador4") as HTMLInputElement;
+
+    jugadorHTML2.style.display = "block";
+    jugadorHTML3.style.display = "block";
+    jugadorHTML4.style.display = "block";
+  }
+
+  jugarMultijugadorLocal() {
+    this.sala.modoDeJuego = (document.getElementById("multijugador_local") as HTMLInputElement).value;
+    let jugadorHTML1 = (document.getElementById("nombreJugador2") as HTMLInputElement).value;
+    let jugadorHTML2 = (document.getElementById("nombreJugador2") as HTMLInputElement).value;
+    let jugadorHTML3 = (document.getElementById("nombreJugador3") as HTMLInputElement).value;
+    let jugadorHTML4 = (document.getElementById("nombreJugador4") as HTMLInputElement).value;
+    let jugadoresHTML = [jugadorHTML1, jugadorHTML2, jugadorHTML3, jugadorHTML4];
+
+    for (let index = 1; index < this.jugadores.length; index++) {
+      if (jugadoresHTML[index] != "") {
+        this.jugadores[index].nombreJugador = jugadoresHTML[index]
+        this.jugadores[index].participa = true;
+      }
+    }
+    //console.log("Muesto jugadores participantes desde el componente creacion-sala " + JSON.stringify(this.jugadores))
+  }
+
+  jugarMultijugadorRed() {
+    this.sala.modoDeJuego=(document.getElementById("multijugador_red") as HTMLInputElement).value;
+    alert("Acá debe asignar un codigo de sala e ir a la partida multijugador");
+  }
+
+  ocultarDificultad() {
+    let select = document.getElementById("selectTiempoPersonalizado") as HTMLInputElement
+    select.style.display = "none";
   }
 
   personalizar() {
-    let select = document.getElementById("tiempoPersonalizado") as HTMLInputElement
+    let select = document.getElementById("selectTiempoPersonalizado") as HTMLInputElement
 
     if ((document.getElementById("personalizado") as HTMLInputElement).checked) {
-      select.style.visibility = "visible";
+      select.style.display = "block";
 
       if (select.value != "0") {
         this.sala.dificultad = parseInt(select.value);

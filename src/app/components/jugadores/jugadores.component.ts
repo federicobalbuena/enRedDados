@@ -7,7 +7,7 @@ import { SalaService } from 'src/app/services/sala.service';
   templateUrl: './jugadores.component.html',
   styleUrls: ['./jugadores.component.css']
 })
-export class JugadoresComponent implements OnInit { //antes de la llave va implements OnInit si habilito metodo ngOnInit()
+export class JugadoresComponent implements OnInit {
 
   constructor(private _salaService: SalaService) { }
 
@@ -15,80 +15,32 @@ export class JugadoresComponent implements OnInit { //antes de la llave va imple
 
   salaActual = new Sala();
 
-  //estado: boolean[] = [];//agregado para cambiar las clases en el html
-
-
   ngOnInit() {
 
-    //constantes para asignar valores (nombres)
-    const jugador_1 = document.getElementById("idJugador1") as HTMLInputElement;//linea original
-    const jugador_2 = document.getElementById("idJugador2") as HTMLInputElement;
-    const jugador_3 = document.getElementById("idJugador3") as HTMLInputElement;
-    const jugador_4 = document.getElementById("idJugador4") as HTMLInputElement;
+    let idJugador1 = document.getElementById("idJugador1") as HTMLInputElement;
+    let idJugador2 = document.getElementById("idJugador2") as HTMLInputElement;
+    let idJugador3 = document.getElementById("idJugador3") as HTMLInputElement;
+    let idJugador4 = document.getElementById("idJugador4") as HTMLInputElement;
 
+    let idJugadores = [idJugador1, idJugador2, idJugador3, idJugador4];
 
-    //constantes para ocultar o no jugadores
-    //const jugador1 = document.getElementById("jugador_1") as HTMLInputElement;
-    const jugador2 = document.getElementById("jugador_2") as HTMLInputElement;
-    const jugador3 = document.getElementById("jugador_3") as HTMLInputElement;
-    const jugador4 = document.getElementById("jugador_4") as HTMLInputElement;
+    let jugador_1_Visible = document.getElementById("jugador_1") as HTMLInputElement;
+    let jugador_2_Visible = document.getElementById("jugador_2") as HTMLInputElement;
+    let jugador_3_Visible = document.getElementById("jugador_3") as HTMLInputElement;
+    let jugador_4_Visible = document.getElementById("jugador_4") as HTMLInputElement;
 
-    function ocultarJugadores() {
-      jugador2.style.visibility = "hidden";
-      jugador3.style.visibility = "hidden";
-      jugador4.style.visibility = "hidden";
-    }
-
-    function jugarMultijugador(sala: Sala) {
-      switch (sala.jugadores.length) {
-        case 2:
-          jugador_2.value = sala.jugadores[1].nombreJugador = "Lucas";
-          jugador3.style.visibility = "hidden";
-          jugador4.style.visibility = "hidden";
-          // sala.jugadores[0].turno = false;
-          // sala.jugadores[1].turno = true;
-          break;
-        case 3:
-          jugador_2.value = sala.jugadores[1].nombreJugador = "Lucas";
-          jugador_3.value = sala.jugadores[2].nombreJugador = "Fede";
-          jugador4.style.visibility = "hidden";
-          // sala.jugadores[0].turno = true;
-          // sala.jugadores[1].turno = false;
-          // sala.jugadores[2].turno = false;              
-          break;
-        default:
-
-          // sala.jugadores[0].turno = false;
-          // sala.jugadores[1].turno = false;
-          // sala.jugadores[2].turno = false;
-          // sala.jugadores[3].turno = true;
-          break;
-      }
-    }
+    let jugadoresVisibles = [jugador_1_Visible, jugador_2_Visible, jugador_3_Visible, jugador_4_Visible];
 
     this._salaService.sala$.subscribe({
 
       next: (sala) => {
-        console.log("Este es el objeto " + JSON.stringify(sala))
+        for (let index = 0; index < sala.jugadores.length; index++) {
+          idJugadores[index].value = sala.jugadores[index].nombreJugador;
 
-        jugador_1.value = sala.jugadores[0].nombreJugador;//nombre que escribo en input crear sala
-        jugador_2.value = sala.jugadores[1].nombreJugador;
-        jugador_3.value = sala.jugadores[2].nombreJugador;
-        jugador_4.value = sala.jugadores[3].nombreJugador;
-        console.log("estos son los jugadores" + JSON.stringify(sala.jugadores));
-        if (sala.modoDeJuego == "Solitario")
-          ocultarJugadores();
-        //else
-        //  jugarMultijugador(sala);
-
-        //resalta el jugador que tiene el turno
-        // for (let i = 0; i < sala.jugadores.length; i++) {
-        //   if (sala.jugadores[i].turno == true)
-        //     this.estado[i] = true;
-        //   else
-        //     this.estado[i] = false;
-        // }
-
+          if (sala.jugadores[index].participa == true) {
+            jugadoresVisibles[index].style.visibility = "visible";
+          }
+        }
         this.salaActual = sala;
       }
     })
