@@ -15,7 +15,7 @@ import { SalaService } from 'src/app/services/sala.service';
 export class DadoComponent implements OnInit {
 
   preguntaResponse = new PreguntaResponse()
-
+  respondio = false;
   constructor(
     private location: Location,
     private router: Router,
@@ -24,7 +24,7 @@ export class DadoComponent implements OnInit {
   ) { }
 
   obtenerPregunta() {
-
+    this._preguntaService.pregunta$.next(true);
     let nroPregunta = document.getElementById("nroPregunta") as HTMLInputElement;
 
     this._preguntaService.obtenerPreguntaPost(nroPregunta.value).subscribe({
@@ -45,12 +45,12 @@ export class DadoComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    let time = 2;
+
+    let time = 1;
     let randomValue: Number;
     const dado: HTMLElement = document.querySelector('.dado') as HTMLElement;
     const nroPregunta = document.getElementById("nroPregunta") as HTMLInputElement;
-    const verPregunta = document.getElementById("btnverpregunta") as HTMLElement;
+    const btnVerPregunta = document.getElementById("btnverpregunta") as HTMLElement;
 
     dado.addEventListener('click', () => {
       dado.style.transition = '';
@@ -80,22 +80,47 @@ export class DadoComponent implements OnInit {
             dado.style.transform = `translateY(0px) rotateX(3600deg) rotateY(1980deg) rotateZ(3600deg)`;
             break;
         };
-
+ 
         if (nroPregunta.value.length < 3) {
           mostrarResultados()
         } else {
-          verPregunta.style.visibility = "hidden";
+          btnVerPregunta.style.visibility = "hidden";
           nroPregunta.value = "";
         }
-      }, time * 10);
+        //mostrarResultados();
+
+      }, time * 1);
     });
+
+    function limpiarCampos() {
+      nroPregunta.value = "";
+
+    }
 
     function mostrarResultados() {
       setTimeout(() => {
         nroPregunta.value = nroPregunta.value + randomValue.toString();
-        nroPregunta.value.length == 3 ? verPregunta.style.visibility = "visible" : verPregunta.style.visibility = "hidden";
-      }, 2000);
+        nroPregunta.style.visibility ="visible";
+        nroPregunta.value.length == 3 ? btnVerPregunta.style.visibility = "visible" : btnVerPregunta.style.visibility = "hidden";
+      }, 1000);
 
     };
+
+    this._salaService.respondio$.subscribe({
+      next: (respuesta) => {
+        this.respondio = respuesta;
+    }})
+
+    this._salaService.respuestaCorrecta$.subscribe({
+
+      next: (respondioCorrectamente) => {
+        if (this.respondio) {
+          nroPregunta.style.visibility = "hidden";
+          btnVerPregunta.style.visibility = "hidden";
+          limpiarCampos();
+        }
+
+      }
+    })
   }
 }

@@ -1,3 +1,4 @@
+<h3>{{cartel}}</h3>
 <div id="cajaGen">
     <div class="caja" id="caja1">
         <img src="../../../assets/Img/gris.jpg" alt="" id="imgInicio">
@@ -29,9 +30,10 @@
         <img src="../../../assets/Img/gris.jpg" alt="" id="imgFin">
     </div>
 </div>
+<audio #audio src="../../../assets/Audio/ganador.mp3"></audio>
 
 <!-- Todo el div que sigue es para probar la logica del tablero, cuando el proyecto esté finalizado hay que borrarlo -->
-<div class="probarLogica">
+<!-- <div class="probarLogica">
     <select id="jugador">
         <option value="0" disabled selected>Elegir jugador</option>
         <option value="1">Jugador 1</option>
@@ -39,6 +41,6 @@
         <option value="3">Jugador 3</option>
         <option value="4">Jugador 4</option>
     </select>
-    <button id="respuestaCorrecta" (click)="respuesta(true)">Respuesta correcta</button>
-    <button id="respuestaIncorrecta" (click)="respuesta(false)">Respuesta incorrecta</button>
-</div>
+    <button id="respuestaCorrecta" (click)="responder(true)">Respuesta correcta</button>
+    <button id="respuestaIncorrecta" (click)="responder(false)">Respuesta incorrecta</button>
+</div> -->

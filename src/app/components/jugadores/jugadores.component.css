@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+#jugador_2, #jugador_3, #jugador_4 {
+    visibility: hidden;
+}
+
 .fancy {
     --offset: 3px;
     background: rgb(55, 21, 90);

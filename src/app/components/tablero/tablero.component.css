@@ -10,6 +10,10 @@
         visibility: visible;
     }
 
+    h3 {
+        text-align: center;
+    }
+
     .ficha {
         animation: rotater 3s;
         width: 33px;
@@ -36,21 +40,21 @@
         bottom: 143px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;
+        visibility: hidden;
     }
 
     #ficha3 {
         bottom: 141px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;
+        visibility: hidden;
     }
 
     #ficha4 {
         bottom: 139px;
         left: 50%;
         transform: translateX(-50%);
-        visibility: visible;
+        visibility: hidden;
     }
 
     #cajaGen {

@@ -1,1 +1,29 @@
-<p>podio works!</p>
+<div class="container">
+  <div class="podio">
+    <div class="lugar" id="segundo">
+      <img src="../../../assets/Img/plata.png" alt="" class="img-fluid rounded-circle">
+      <p>Segundo Lugar</p>
+      <p>{{segundo.nombreJugador}}</p>
+      <p>{{segundo.puntos}} puntos</p>
+    </div>
+
+    <div class="lugar" id="primero">
+      <img src="../../../assets/Img/oro.png" alt="oro" class="">
+      <p>Primer Lugar</p>
+      <p>{{primero.nombreJugador}}</p>
+      <p>{{primero.puntos}} puntos</p>
+    </div>
+
+    <div class="lugar" id="tercero">
+      <img src="../../../assets/Img/bronce.png" alt="" class="img-fluid rounded-circle">
+      <p>Tercer Lugar</p>
+      <p>{{tercero.nombreJugador}}</p>
+      <p>{{tercero.puntos}} puntos</p>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button type="button" class="btn btn-primary btn-lg" id="volverAjugar" routerLink="">Volver a jugar</button>
+  </div>
+</div>
+<audio #audio src="../../../assets/Audio/podio.mp3"></audio>
