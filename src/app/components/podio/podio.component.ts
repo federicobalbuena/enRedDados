@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './podio.component.html',
   styleUrls: ['./podio.component.css']
 })
+
 export class PodioComponent implements OnInit {
 
   podio: Jugador[] = [];
@@ -27,16 +28,12 @@ export class PodioComponent implements OnInit {
 
   audio!: ElementRef;
 
-
-
   ngOnInit() {
-
-
     this.premiar()
-
-
   }
+
   contador = 0;
+
   obtenerCantidadDeJugadoresActivosEnEstePartido() {
     this.podio.forEach((jugador) => {
       if (jugador.participa) this.contador++

@@ -88,7 +88,7 @@ export class TableroComponent implements OnInit {
         console.log("es el turno del jugador " + this.jugadores[index].nombreJugador)
         if (esCorrecta) {
           this.avanzar(this.fichasActivas[index], cantidad);
-          this.jugadores[index].puntos = this.jugadores[index].puntos + 18;
+          this.jugadores[index].puntos = this.jugadores[index].puntos + 3;
           this.jugadores[index].puntos >= 18 ? this.ganarPartida() : "";
           index = index--;
           console.log(`el jugador ${this.jugadores[index].nombreJugador} tiene ${this.jugadores[index].puntos} puntos.`)
@@ -106,17 +106,12 @@ export class TableroComponent implements OnInit {
           } else {
             this.jugadores[siguiente].turno = true;
           }
-          this.contador ++;
+          this.contador++;
           break
         }
-
-        
       }
-
     }
-
   }
-
 
   avanzar(ficha: HTMLElement, cantidad: number) {
     let mensaje = "¡Correcto!"
@@ -140,18 +135,14 @@ export class TableroComponent implements OnInit {
   }
 
   ganarPartida() {
-    // FALTA RUTEO PARA EL PODIO
     this.podio = this.jugadores.sort((a, b) => b.puntos - a.puntos);
-    console.log(JSON.stringify(this.podio))
-    //let podioTXT = [this.podio[0].nombreJugador, this.podio[1].nombreJugador, this.podio[2].nombreJugador]
+    //console.log(JSON.stringify(this.podio))
     this.audio.nativeElement.play();
-    
-    //this._salaService.podio$.next(this.podio)
-    console.log("mande el array podio");
+    //console.log("mande el array podio");
     setTimeout(() => {
       let queryParams = { queryParams: { array: JSON.stringify(this.podio) } };
       this._router.navigate(["/podio"], queryParams);
-    }, 3000);
-    console.log("navego a podio")
+    }, 3500);
+    //console.log("navego a podio")
   }
 }

@@ -33,7 +33,7 @@ export class CreacionSalaComponent implements OnInit {
 
     (document.getElementById("multijugador_local") as HTMLInputElement).checked ? this.jugarMultijugadorLocal() : "";
 
-    //(document.getElementById("multijugador_red") as HTMLInputElement).checked ? this.jugarMultijugadorRed() : "";
+    //(document.getElementById("multijugador_red") as HTMLInputElement).checked ? this.jugarMultijugadorRed() : ""; PROXIMO MVP
 
     this.establecerDificultad();
 
@@ -61,9 +61,6 @@ export class CreacionSalaComponent implements OnInit {
   }
 
   mostrarMultiJugador() {
-    /* for (let index = 1; index < this.jugadoresHTML.length; index++) {
-      this.jugadoresHTML[index].style.display = "block";
-    } */
     this.jugadoresHTML[1].style.display = "block"
   }
 
