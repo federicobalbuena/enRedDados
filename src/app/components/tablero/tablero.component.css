@@ -10,6 +10,10 @@
         visibility: visible;
     }
 
+    h3 {
+        text-align: center;
+    }
+
     .ficha {
         animation: rotater 3s;
         width: 33px;

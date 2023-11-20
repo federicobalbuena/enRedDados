@@ -17,7 +17,6 @@ export class CreacionSalaComponent implements OnInit {
   new Jugador("Jugador 2", false, false, 0, false),
   new Jugador("Jugador 3", false, false, 0, false),
   new Jugador("Jugador 4", false, false, 0, false)];
-
   sala = new Sala(this.jugadores, "Solitario", 20);
   jugadoresHTML: HTMLInputElement[] = [];
   ngOnInit() {
@@ -26,7 +25,7 @@ export class CreacionSalaComponent implements OnInit {
     let jugadorHTML3 = document.getElementById("nombreJugador3") as HTMLInputElement;
     let jugadorHTML4 = document.getElementById("nombreJugador4") as HTMLInputElement;
     this.jugadoresHTML = [jugadorHTML1, jugadorHTML2, jugadorHTML3, jugadorHTML4];
-  }
+ }
   
   iniciarPartida() {
 
@@ -34,7 +33,7 @@ export class CreacionSalaComponent implements OnInit {
 
     (document.getElementById("multijugador_local") as HTMLInputElement).checked ? this.jugarMultijugadorLocal() : "";
 
-    (document.getElementById("multijugador_red") as HTMLInputElement).checked ? this.jugarMultijugadorRed() : "";
+    //(document.getElementById("multijugador_red") as HTMLInputElement).checked ? this.jugarMultijugadorRed() : "";
 
     this.establecerDificultad();
 
@@ -62,9 +61,10 @@ export class CreacionSalaComponent implements OnInit {
   }
 
   mostrarMultiJugador() {
-    for (let index = 1; index < this.jugadoresHTML.length; index++) {
+    /* for (let index = 1; index < this.jugadoresHTML.length; index++) {
       this.jugadoresHTML[index].style.display = "block";
-    }
+    } */
+    this.jugadoresHTML[1].style.display = "block"
   }
 
   jugarMultijugadorLocal() {
@@ -100,6 +100,14 @@ export class CreacionSalaComponent implements OnInit {
         this.sala.dificultad = 20;
       }
     }
+  }
+
+  habilitarJugador3 () {
+    this.jugadoresHTML[2].style.display = "block";
+  }
+
+  habilitarJugador4 () {
+    this.jugadoresHTML[3].style.display = "block";
   }
 }
 

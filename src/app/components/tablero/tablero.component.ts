@@ -9,7 +9,7 @@ import { Jugador } from 'src/app/models/jugador';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
-  
+
   constructor(private _salaService: SalaService) { }
 
   _sala: Sala = new Sala;
@@ -26,8 +26,9 @@ export class TableroComponent implements OnInit {
   item = 0;
   rnd = 0;
   posibles: Number[] = [];
-  mensaje: string = "" // VER POSIBILIDAD DE QUE MUESTRE UN CARTEL AL RESPONDER BIEN O MAL, O QUE HAGA UN SONIDO
-  
+  contador = 0;
+  cartel: string = "";
+
   ngOnInit() {
 
     let ficha1 = document.getElementById("ficha1") as HTMLElement;
@@ -35,7 +36,7 @@ export class TableroComponent implements OnInit {
     let ficha3 = document.getElementById("ficha3") as HTMLElement;
     let ficha4 = document.getElementById("ficha4") as HTMLElement;
     let fichas = [ficha1, ficha2, ficha3, ficha4];
-    
+
     this._salaService.sala$.subscribe({
 
       next: (sala) => {
@@ -66,6 +67,7 @@ export class TableroComponent implements OnInit {
 
       next: (respondioCorrectamente) => {
         this.responder(respondioCorrectamente);
+
       }
     })
   }
@@ -75,63 +77,72 @@ export class TableroComponent implements OnInit {
   audio!: ElementRef;
 
   responder(esCorrecta: boolean) {
-    // FUNCIONA TODO, SALVO EN MODO MULTIJUGADOR CUANDO SE DEJA UN NOMBRE EN EL MEDIO EN BLANCO,
-    // POR EJEMPLO, SE PONE NOMBRE AL JUGADOR 1 Y EL 3 PERO NO EL 2. SI BIEN EL JUGADOR 2 NO FIGURA
-    // COMO PARTICIPANTE, ROMPE EL CICLO. PIENSO QUE FILTRANDO/ORDENANDO LOS VECTORES DE JUGADORES Y FICHAS SE PUEDE SOLUCIONAR
-    // (HAY DOS VECTORES CREADOS, JUGADORESFILTRADOS Y FICHASACTIVASFILTRADAS)
     let cantidad = 3;
 
     for (let index = 0; index < this.cantidadDeJugadores; index++) {
       if (this.jugadores[index].turno) {
         console.log("es el turno del jugador " + this.jugadores[index].nombreJugador)
         if (esCorrecta) {
-          avanzar(this.fichasActivas[index], cantidad);
+          this.avanzar(this.fichasActivas[index], cantidad);
           this.jugadores[index].puntos = this.jugadores[index].puntos + 3;
           this.jugadores[index].puntos >= 18 ? this.ganarPartida() : "";
           index = index--;
           console.log(`el jugador ${this.jugadores[index].nombreJugador} tiene ${this.jugadores[index].puntos} puntos.`)
         } else {
-          retroceder(this.fichasActivas[index]);
+          this.retroceder(this.fichasActivas[index]);
           this.jugadores[index].turno = false;
           if (this.jugadores[index].puntos > 0) {
             this.jugadores[index].puntos = this.jugadores[index].puntos - 1;
           }
           console.log("El jugador " + this.jugadores[index].nombreJugador + " tiene " + JSON.stringify(this.jugadores[index].puntos + " puntos"));
-          let pepe: number = index + 1;
-          if (pepe == this.cantidadDeJugadores) {
+          let siguiente: number = index + 1;
+          if (siguiente == this.cantidadDeJugadores) {
             this.jugadores[0].turno = true;
             index = 0;
           } else {
-            this.jugadores[pepe].turno = true;
+            this.jugadores[siguiente].turno = true;
           }
+          this.contador ++;
           break
         }
 
+        
       }
 
     }
 
-    function avanzar(ficha: HTMLElement, cantidad: number) {
-      for (let index = 0; index < cantidad; index++) {
-        let nextDivFicha = ficha.parentElement?.nextElementSibling;
-        nextDivFicha?.appendChild(ficha);
-      }
+  }
+
+
+  avanzar(ficha: HTMLElement, cantidad: number) {
+    let mensaje = "¡Correcto!"
+    for (let index = 0; index < cantidad; index++) {
+      let nextDivFicha = ficha.parentElement?.nextElementSibling;
+      nextDivFicha?.appendChild(ficha);
+      this.mostrarCartel(mensaje);
     }
 
-    function retroceder(ficha: HTMLElement) {
-      let prevDivFicha = ficha.parentElement?.previousElementSibling;
-      prevDivFicha?.appendChild(ficha);
-    }
+  }
+
+  retroceder(ficha: HTMLElement) {
+    let mensaje = "¡Incorrecto!";
+    let prevDivFicha = ficha.parentElement?.previousElementSibling;
+    prevDivFicha?.appendChild(ficha);
+    this.mostrarCartel(mensaje);
+  }
+
+  mostrarCartel(mensaje: string) {
+    this.contador > 0 ? this.cartel = mensaje : "";
   }
 
   ganarPartida() {
     // FALTA RUTEO PARA EL PODIO
     this.podio = this.jugadores.sort((a, b) => b.puntos - a.puntos);
-    
+
     let podioTXT = [this.podio[0].nombreJugador, this.podio[1].nombreJugador, this.podio[2].nombreJugador]
     this.audio.nativeElement.play();
 
     this._salaService.podio$.next(podioTXT)
-    
+
   }
 }

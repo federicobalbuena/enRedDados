@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { SalaService } from 'src/app/services/sala.service';
-
+import { PreguntaService } from 'src/app/services/pregunta.service';
 @Component({
   selector: 'app-temporizador',
   templateUrl: './temporizador.component.html',
@@ -8,7 +8,9 @@ import { SalaService } from 'src/app/services/sala.service';
 })
 export class TemporizadorComponent implements OnInit {
 
-  constructor(private _salaService: SalaService) { }
+  constructor(
+    private _salaService: SalaService,
+    private _preguntaService: PreguntaService) { }
 
   tempInicial: number = 0;
   tiempoRestante: number = 0; // El valor lo va a tomar segun la dificultad seleccionada al momento de crear la partida
@@ -65,7 +67,7 @@ export class TemporizadorComponent implements OnInit {
     this.colorFondo = 'rgb(35, 177, 77)';
     this.tiempoRestante = this.tempInicial;
     this._salaService.respuestaCorrecta$.next(false);
-
+    this._preguntaService.pregunta$.next(false);
     clearInterval(interval);
 
   }

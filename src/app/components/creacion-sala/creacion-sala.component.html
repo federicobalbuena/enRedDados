@@ -16,7 +16,7 @@
       </div>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="modo-juego" id="multijugador_red" (click)="ocultarJugadores()" value="multijugador_red">
+        <input class="form-check-input" type="radio" name="modo-juego" id="multijugador_red" (click)="jugarMultijugadorRed()" value="multijugador_red">
         <label class="form-check-label" for="multijugador_red">
           Multijugador Red
         </label>
@@ -36,8 +36,8 @@
       </div>
 
 
-      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 2" id="nombreJugador2">
-      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 3" id="nombreJugador3">
+      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 2" id="nombreJugador2" (click)="habilitarJugador3()">
+      <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 3" id="nombreJugador3" (click)="habilitarJugador4()">
       <input type="text" class="form-control" placeholder="Ingresa el nombre del jugador 4" id="nombreJugador4">
 
     </fieldset>
