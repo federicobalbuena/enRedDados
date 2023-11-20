@@ -1,0 +1,40 @@
+<h1>Bienvenido a EnRedDados!</h1>
+<div class="container">
+
+    <div class="img-dado">
+        <img src="../../../assets/Img/dado.png" alt="" width="400">
+    </div>
+
+    <div class="buttons">
+        <button type="button" class="btn btn-primary btn-lg" id="juegoNuevo" routerLink="/crear-sala">Crear juego nuevo</button>
+        
+        <button type="button" class="btn btn-primary btn-lg" id="tengoCodigo" (click)="ingresarCodigo()">Ya tengo un codigo</button>
+
+        <div class="input-group mb-3" id="inputCodigo">
+            <input type="text" class="form-control" id="tuNombre" placeholder="Tu nombre" aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+                <input type="text" class="form-control" id="codigoSala" placeholder="Codigo" aria-label="Recipient's username"
+                aria-describedby="button-addon2">
+                <button class="btn btn-primary" type="button" id="button-addon2" routerLink="crear-sala">Ingresar</button>
+        </div>
+    </div>
+
+    <div id="historia">
+        <img src="../../../assets/Img/historia.png" alt="" width="100">
+    </div>
+    <div id="geografia">
+        <img src="../../../assets/Img/geografia.png" alt="" width="100">
+    </div>
+    <div id="arte">
+        <img src="../../../assets/Img/arte.png" alt="" width="100">
+    </div>
+    <div id="deporte">
+        <img src="../../../assets/Img/deporte.png" alt="" width="100">
+    </div>
+    <div id="ciencia">
+        <img src="../../../assets/Img/quimica.png" alt="" width="100">
+    </div>
+    <div id="espectaculo">
+        <img src="../../../assets/Img/espectaculo.png" alt="" width="100">
+    </div>
+</div>

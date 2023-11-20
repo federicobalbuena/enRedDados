@@ -1,0 +1,78 @@
+    .caja img {
+        width: 5vw;
+        height: 72%;
+        border: 5px black solid;
+        margin-left: -4px;
+        margin-top: 50%;
+    }
+
+    .probarLogica {
+        visibility: visible;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    .ficha {
+        animation: rotater 3s;
+        width: 33px;
+        height: 33px;   
+        background-color: whitesmoke;
+        position: relative;
+        border: 3px black solid;
+        border-radius: 50%;
+        text-align: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 18px;
+        color: black;
+        left: 25px;
+    }
+
+    #ficha1 {
+        bottom: 145px;
+        left: 50%;
+        transform: translateX(-50%);
+        visibility: visible;     
+    }
+
+    #ficha2 {
+        bottom: 143px;
+        left: 50%;
+        transform: translateX(-50%);
+        visibility: hidden;
+    }
+
+    #ficha3 {
+        bottom: 141px;
+        left: 50%;
+        transform: translateX(-50%);
+        visibility: hidden;
+    }
+
+    #ficha4 {
+        bottom: 139px;
+        left: 50%;
+        transform: translateX(-50%);
+        visibility: hidden;
+    }
+
+    #cajaGen {
+        display: flex;
+        justify-content: center;
+        height: 210px;
+    }
+
+    @keyframes rotater {
+        0% {
+            transform: rotate(0) scale(1)
+        }
+
+        50% {
+            transform: rotate(360deg) scale(2)
+        }
+
+        100% {
+            transform: rotate(0) scale(1)
+        }
+    }

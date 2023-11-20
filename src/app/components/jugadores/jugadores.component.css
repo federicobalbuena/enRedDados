@@ -1,0 +1,88 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+    height: 100%;
+}
+
+#jugador_2, #jugador_3, #jugador_4 {
+    visibility: hidden;
+}
+
+.fancy {
+    --offset: 3px;
+    background: rgb(55, 21, 90);
+    border-radius: 100px;
+    position: relative;
+    height: 50%; 
+    width: 80%;
+    overflow: hidden;
+    margin: auto;    
+}
+
+.fancy input {
+    background: transparent;
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Conic gradient */
+.fancy::before { 
+    content: '';
+    background: conic-gradient(transparent 270deg, white, transparent);/*color giro*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1;
+    width: 100%;
+    animation: rotate 1.5s linear infinite; /*velocidad de giro*/
+}
+
+/* Overlay */
+.fancy::after {
+    content: '';
+    background: inherit;
+    border-radius: inherit;
+    position: absolute;
+    inset: var(--offset);
+    height: calc(100% - 2 * var(--offset));
+    width: calc(100% - 2 * var(--offset));
+}
+
+
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+    }
+}
+
+
+.fancyNo {
+    background: rgb(55, 21, 90);
+    border-radius: 100px;
+    position: relative;
+    height: 50%; 
+    width: 80%;
+    margin: auto;    
+}
+
+.fancyNo input {
+    background: transparent;
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    padding: 1rem;
+    text-align: center;
+}
