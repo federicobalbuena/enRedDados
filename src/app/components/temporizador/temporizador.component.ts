@@ -46,8 +46,6 @@ export class TemporizadorComponent implements OnInit {
     let interval = setInterval(() => { // Crea un intervalo que se ejecute cada segundo
 
       this.tiempoRestante > 0 ? this.cuentaAtras() : this.cambioJugador(interval);
-
-
     }, 1000); // El segundo parámetro es el tiempo en milisegundos entre cada ejecución
   }
 
