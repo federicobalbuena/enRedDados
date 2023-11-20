@@ -1,0 +1,56 @@
+.crear{
+    margin-top: 3%;
+    margin-left: 2%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-control {
+    width: 21.5%;
+}
+
+#selectMultijugadorLocal {
+    display: none;
+    margin-left: 0.5%;
+    width: 12%;
+}
+
+#inputDefault {
+    width: 200px;
+    margin-bottom: 1%;
+}
+
+#selectTiempoPersonalizado {
+    display: none;
+    width: 20.5%;
+}
+
+#nombreJugador1 {
+    margin-top: .5%;
+}
+
+#nombreJugador2 {
+    display: none;
+    margin-top: .5%;
+}
+
+#nombreJugador3 {
+    display: none;
+    margin-top: .5%;
+    margin-bottom: .5%;
+}
+
+#nombreJugador4 {
+    display: none;
+}
+
+#btnCrear {
+    margin-top: 1%;
+}
+
+#btnVolver {
+    margin-top: 1%;
+    margin-left: .5%;
+}

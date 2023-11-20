@@ -1,0 +1,67 @@
+.podio {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px auto;
+  width: 80%;
+}
+
+.lugar {
+  text-align: center;
+  opacity: 100;
+  transform: translateY(50px);
+  transition: opacity 1s, transform 1s;
+}
+
+.lugar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  animation: bounce 1s ease-in-out;
+}
+
+.lugar p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Animaciones de entrada para los lugares */
+#tercero {
+  margin-top: 90px;
+  animation-delay: 1.5s; /* Tercer lugar */
+}
+
+#segundo {
+  margin-top: 70px;
+  animation-delay: 3s; /* Segundo lugar */
+}
+
+#primero {
+  animation-delay: 5s; /* Primer lugar */
+}
+
+/* Establecer las animaciones una vez que el elemento es visible */
+.podio:hover .lugar {
+  opacity: 100;
+  transform: translateY(0);
+}
+
+.container{
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 70%;
+}

@@ -1,0 +1,8 @@
+#pregunta{
+    visibility: "hidden";
+}
+
+#txtPregunta {
+    opacity: 0%;
+    width: 0px;
+}
