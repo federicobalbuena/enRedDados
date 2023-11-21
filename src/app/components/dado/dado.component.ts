@@ -16,6 +16,8 @@ export class DadoComponent implements OnInit {
 
   preguntaResponse = new PreguntaResponse()
   respondio = false;
+  contadorClicks = 0
+
   constructor(
     private location: Location,
     private router: Router,
@@ -24,8 +26,8 @@ export class DadoComponent implements OnInit {
   ) { }
 
   obtenerPregunta() {
-    this._preguntaService.pregunta$.next(true);
-    let nroPregunta = document.getElementById("nroPregunta") as HTMLInputElement;
+    const nroPregunta = document.getElementById("nroPregunta") as HTMLInputElement;
+    const btnVerPregunta = document.getElementById("btnverpregunta") as HTMLButtonElement;
 
     this._preguntaService.obtenerPreguntaPost(nroPregunta.value).subscribe({
       next: data => {
@@ -35,11 +37,14 @@ export class DadoComponent implements OnInit {
 
         this._preguntaService.setPreguntaResponse(this.preguntaResponse)
         console.log(this.preguntaResponse);
+        this._preguntaService.spinner$.next(false);
+        this._preguntaService.pregunta$.next(true);
         this._salaService.initTemporizador$.next(true);
-
-
-      }, error: err => {
+        btnVerPregunta.style.visibility = "hidden";
+      }, 
+      error: err => {
         console.log(err);
+        this._preguntaService.spinner$.next(false);
       }
     })
   }
@@ -53,7 +58,9 @@ export class DadoComponent implements OnInit {
     const btnVerPregunta = document.getElementById("btnverpregunta") as HTMLElement;
 
     dado.addEventListener('click', () => {
-      dado.style.transition = '';
+      this.contadorClicks++;
+      if(this.contadorClicks <= 3){
+        dado.style.transition = '';
       dado.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
       setTimeout(() => {
         dado.style.transition = `transform ${time}s`;
@@ -90,6 +97,8 @@ export class DadoComponent implements OnInit {
         //mostrarResultados();
 
       }, time * 1);
+      }
+      
     });
 
     function limpiarCampos() {
@@ -117,6 +126,7 @@ export class DadoComponent implements OnInit {
         if (this.respondio) {
           nroPregunta.style.visibility = "hidden";
           btnVerPregunta.style.visibility = "hidden";
+          this.contadorClicks = 0
           limpiarCampos();
         }
 

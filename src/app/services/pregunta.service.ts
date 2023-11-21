@@ -21,8 +21,9 @@ export class PreguntaService {
 
   public sala$ = new BehaviorSubject<Sala>(new Sala());
   public pregunta$ = new BehaviorSubject<Boolean>(false);
+  public spinner$ = new BehaviorSubject<boolean>(false);
 
-  url = "https://localhost:44362//api/PreguntasCDM/";
+  url = "http://ec2-54-162-72-222.compute-1.amazonaws.com:44362//api/PreguntasCDM/";
 
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
@@ -30,7 +31,7 @@ export class PreguntaService {
   constructor(private http: HttpClient) { }
 
   obtenerPreguntaPost(nroPregunta: string): Observable<any>{
-
+    this.spinner$.next(true);
     let pregunta: ObjPregunta = {
         nroPregunta: nroPregunta
     }
