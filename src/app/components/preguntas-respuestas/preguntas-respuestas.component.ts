@@ -14,6 +14,7 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
   respuestasList: Respuesta[] = []
   pregunta: string = ""
   respondio = false;
+  spinner_dado = false;
 
   @Output() onComplete = new EventEmitter<void>();
   private preguntaResponseRef: Subscription = new Subscription;
@@ -26,6 +27,11 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
     //this.timer.restartCountdown(this.init); 
     let pregunta = document.getElementById("pregunta") as HTMLElement;
     let txtPregunta = document.getElementById("txtPregunta") as HTMLInputElement;
+
+    this._preguntaService.spinner$.subscribe({
+        next: (mostrarSpinner) => {
+          this.spinner_dado = mostrarSpinner;
+      }})
 
     this.preguntaResponseRef = this._preguntaService.preguntaResponse.subscribe(
       res => {
@@ -59,7 +65,7 @@ export class PreguntasRespuestasComponent implements OnInit, OnDestroy {
 
       function limpiarCampos() {
         txtPregunta.value = "";
-    
+        
       }
   }
 

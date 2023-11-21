@@ -6,3 +6,13 @@
     opacity: 0%;
     width: 0px;
 }
+
+#img-spinner-dado {
+    width: 10%;
+    height: 10%;
+    margin-left: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+  }

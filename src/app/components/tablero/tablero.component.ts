@@ -132,6 +132,9 @@ export class TableroComponent implements OnInit {
 
   mostrarCartel(mensaje: string) {
     this.contador > 0 ? this.cartel = mensaje : "";
+    setTimeout(() => {
+      this.cartel = " "
+  }, 3000);
   }
 
   ganarPartida() {
