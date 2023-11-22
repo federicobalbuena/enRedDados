@@ -52,6 +52,12 @@
   animation-delay: 5s; /* Primer lugar */
 }
 
+#volverAjugar {
+  margin-top: 20%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 /* Establecer las animaciones una vez que el elemento es visible */
 .podio:hover .lugar {
   opacity: 100;

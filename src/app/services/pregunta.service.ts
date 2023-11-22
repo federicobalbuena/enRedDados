@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import  { ObjPregunta }  from '../models/ObjPregunta';
 import { PreguntaResponse } from '../models/preguntaResponse';
 import { Sala } from '../models/sala';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class PreguntaService {
   public pregunta$ = new BehaviorSubject<Boolean>(false);
   public spinner$ = new BehaviorSubject<boolean>(false);
 
-  url = "http://ec2-54-162-72-222.compute-1.amazonaws.com:44362//api/PreguntasCDM/";
+  url = environment.RUTA_API;
 
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
