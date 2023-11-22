@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import  { ObjPregunta }  from '../models/ObjPregunta';
 import { PreguntaResponse } from '../models/preguntaResponse';
 import { Sala } from '../models/sala';
-import { environment } from 'src/enviroments/environment.prod';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
