@@ -70,9 +70,14 @@ export class CreacionSalaComponent implements OnInit {
         this.jugadores[index].nombreJugador = this.jugadoresHTML[index].value
         this.jugadores[index].participa = true;
       }
+      
     }
     //console.log("Muestro jugadores participantes desde el componente creacion-sala " + JSON.stringify(this.jugadores))
   }
+/* 
+  ordenarJugadores() {
+    this.jugadores.
+  } */
 
   jugarMultijugadorRed() {
     this.sala.modoDeJuego = (document.getElementById("multijugador_red") as HTMLInputElement).value;
