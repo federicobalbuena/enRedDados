@@ -23,7 +23,7 @@ export class PreguntaService {
   public pregunta$ = new BehaviorSubject<Boolean>(false);
   public spinner$ = new BehaviorSubject<boolean>(false);
 
-  url = "http://ec2-18-210-31-61.compute-1.amazonaws.com/api/PreguntasCDM/"
+  url = "https://ec2-18-210-31-61.compute-1.amazonaws.com/api/PreguntasCDM/"
 
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
