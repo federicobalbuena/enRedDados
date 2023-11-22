@@ -24,11 +24,7 @@ export class PreguntaService {
   public pregunta$ = new BehaviorSubject<Boolean>(false);
   public spinner$ = new BehaviorSubject<boolean>(false);
 
-<<<<<<< Updated upstream
   url = environment.RUTA_API;
-=======
-  url = .env.RUTA_API;
->>>>>>> Stashed changes
 
   headers = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
  
